@@ -67,7 +67,6 @@ body {
   border-bottom: 2px solid #dc3545;
 }
 .search-button{
-  border-radius: 50%;
   padding: 10px 16px;
   transition: all .4s;
 }
@@ -96,7 +95,7 @@ body {
   }
   .top-navbar{
     position: static;
-     background: linear-gradient( rgba(0,0,0,.7), rgba(0,0,0,.9)),url(../images/bg14.jpg);
+     background: linear-gradient( rgba(0,0,0,.7), rgba(0,0,0,.9)),url(../../images/bg14.jpg);
    background-position: center;
    background-repeat: no-repeat;
    background-size: cover;

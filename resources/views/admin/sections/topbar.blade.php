@@ -1,23 +1,42 @@
 <div class="col-xl-10 col-lg-9 col-md-8 mr-auto bg-dark fixed-top py-2 top-navbar">
 
     <div class="row align-items-center">
-      <div class="col-md-4 ">
+      <div class="col-md-3 ">
         <h4 class="text-light mb-0 ">مدیریت</h4>
       </div>
       <div class="col-md-5">
         <form>
           <div class="input-group">
-            <input type="text" placeholder="جستجو..." class="form-control search-input">
-            <button type="button" class="btn btn-white search-button"><i class="fas fa-search text-danger"></i>
-            </button>
+              <button type="button" class="btn btn-white rounded-circle search-button"><i class="fas fa-search text-danger"></i>
+              </button>
+            <input type="text" placeholder="جستجو..." class="form-control text-light search-input">
           </div>
         </form>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <ul class="navbar-nav">
           <li class="nav-item icon-parent"><a href="#" class="nave-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a></li>
           <li class="nav-item icon-parent"><a href="#" class="nave-link icon-bullet"><i class="fas fa-bell text-muted fa-lg"></i></a></li>
-          <li class="nav-item mr-md-auto"><a href="#" class="nave-link"><i class="fas fa-sign-out-alt  text-danger fa-lg" data-toggle="modal" data-target="#sign-out"></i></a></li>
+          <li class="nav-item "><a href="#" class="nave-link"><i class="fas fa-sign-out-alt  text-danger fa-lg" data-toggle="modal" data-target="#sign-out"></i></a></li>
+          <li class="nav-item me-md-2 position-relative">
+            <a href="" class="nav-link text-white collapse-sidebar-link p-0  collapsed" data-toggle="collapse" data-target="#collapseadmin" aria-expanded="true" aria-controls="collapseadmin">
+                <div class="text-center">
+                    <img src="{{ asset('images/admin.jpeg') }}" width="40" class="rounded-circle">
+                    <div class="text-white small">خودم </div>
+                  </div>
+            </a>
+            <div
+                id="collapseadmin"
+                class="collapse mr-5 position-absolute bg-secondary border border-1 rounded-3"
+                style="top:55px;left:-4px; width:200px"
+            >
+                <div class="collapse-item-link bg-licollapse-sidebaght py-2 collapse-inner rounded">
+                    <a class="nav-link text-dark p-3 sidebar-link collapse-item" href="/admin/store-employee">افزودن کارمند</a>
+                    <a class="nav-link text-dark p-3 sidebar-link collapse-item" href="/admin/employee">همه کارمندان</a>
+                </div>
+            </div>
+          </li>
+
         </ul>
       </div>
     </div>

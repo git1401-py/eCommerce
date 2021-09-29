@@ -1,5 +1,6 @@
 <footer>
-    <div class="container-fluid">
+    <div class="container-fluid bg-warning "
+    style="position: relative;bottom:0px;">
       <div class="row">
         <div class="col-xl-10 col-lg-9 col-md-8 mr-auto ml-0">
           <div class="row border-top pt-3">
