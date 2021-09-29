@@ -5,7 +5,19 @@
       <img src="{{ asset('images/admin.jpeg') }}" width="50" class="rounded-circle ml-3">
       <a href="#" class="text-white">خودم </a>
     </div>
-    <ul class="navbar-nav flex-column mt-4">
+    <ul class="navbar-nav flex-column mt-4 p-0">
+        <li class="nav-item">
+            <a class="nav-link text-white p-3 collapse-sidebar-link collapsed" href="" data-toggle="collapse" data-target="#collapseEmployee" aria-expanded="true" aria-controls="collapseEmployee">
+                <i class="far fa-window-maximize text-light fa-lg ml-3"></i>
+                <span>کارمندان</span>
+            </a>
+            <div id="collapseEmployee" class="collapse mr-5" data-parent="#accordionSidebar">
+                <div class="collapse-item-link bg-light py-2 collapse-inner rounded">
+                    <a class="nav-link text-dark p-3 sidebar-link collapse-item" href="/admin/store-employee">افزودن کارمند</a>
+                    <a class="nav-link text-dark p-3 sidebar-link collapse-item" href="/admin/employee">همه کارمندان</a>
+                </div>
+            </div>
+        </li>
       <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 current"><i class="fas fa-home text-light fa-lg ml-3"></i>مدیریت</a></li>
       <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-user text-light fa-lg ml-3"></i>پروفایل</a></li>
       <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-envelope text-light fa-lg ml-3"></i>صندوق ورودی</a></li>
