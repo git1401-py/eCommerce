@@ -27,8 +27,8 @@
                         href="{{ route('admin.categories.index') }}">دسته بندی ها</a>
                     <a class="nav-link text-dark p-3 sidebar-link collapse-item"
                         href="{{ route('admin.attributes.index') }}">ویژگی ها</a>
-                    {{-- <a class="nav-link text-dark p-3 sidebar-link collapse-item"
-                        href="{{ route('admin.tags.index') }}">تگ ها</a> --}}
+                    <a class="nav-link text-dark p-3 sidebar-link collapse-item"
+                        href="{{ route('admin.tags.index') }}">تگ ها</a>
                 </div>
             </div>
         </li>
