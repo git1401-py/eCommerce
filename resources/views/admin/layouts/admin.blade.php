@@ -11,6 +11,9 @@
     {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
     <link rel="stylesheet" href="{{ asset('css/admin/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin/style.css') }}">
+
+    @yield('css')
+
     <title>Admin - @yield('title')</title>
   </head>
   <body >

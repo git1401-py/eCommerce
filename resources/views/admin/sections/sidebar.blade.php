@@ -23,8 +23,8 @@
                         href="{{ route('admin.products.index') }}">لیست محصولات</a> --}}
                     {{-- <a class="nav-link text-dark p-3 sidebar-link collapse-item"
                         href="{{ route('admin.comments.index') }}">لیست کامنت ها</a> --}}
-                    {{-- <a class="nav-link text-dark p-3 sidebar-link collapse-item"
-                        href="{{ route('admin.categories.index') }}">دسته بندی ها</a> --}}
+                    <a class="nav-link text-dark p-3 sidebar-link collapse-item"
+                        href="{{ route('admin.categories.index') }}">دسته بندی ها</a>
                     <a class="nav-link text-dark p-3 sidebar-link collapse-item"
                         href="{{ route('admin.attributes.index') }}">ویژگی ها</a>
                     {{-- <a class="nav-link text-dark p-3 sidebar-link collapse-item"

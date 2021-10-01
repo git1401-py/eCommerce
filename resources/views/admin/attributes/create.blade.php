@@ -21,7 +21,7 @@
                                 <div class="form-row d-flex align-items-center">
                                     <div class="form-group col-md-6">
                                         <label for="name">نام</label>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name">
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
                                     </div>
                                     <div class="form-group col-md-6"></div>
 

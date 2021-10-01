@@ -14,11 +14,12 @@
         </form>
       </div>
       <div class="col-md-4">
-        <ul class="navbar-nav">
-          <li class="nav-item icon-parent"><a href="#" class="nave-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a></li>
-          <li class="nav-item icon-parent"><a href="#" class="nave-link icon-bullet"><i class="fas fa-bell text-muted fa-lg"></i></a></li>
-          <li class="nav-item "><a href="#" class="nave-link"><i class="fas fa-sign-out-alt  text-danger fa-lg" data-toggle="modal" data-target="#sign-out"></i></a></li>
-          <li class="nav-item me-md-2 position-relative">
+        <ul class="navbar-nav ">
+            <div class="w-auto  d-flex me-auto">
+                <li class="nav-item px-1 icon-parent"><a href="#" class="nave-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a></li>
+          <li class="nav-item px-1 icon-parent"><a href="#" class="nave-link icon-bullet"><i class="fas fa-bell text-muted fa-lg"></i></a></li>
+          <li class="nav-item px-1 "><a href="#" class="nave-link"><i class="fas fa-sign-out-alt  text-danger fa-lg" data-toggle="modal" data-target="#sign-out"></i></a></li>
+          <li class="nav-item px-1 me-md-2 position-relative">
             <a href="" class="nav-link text-white collapse-sidebar-link p-0  collapsed" data-toggle="collapse" data-target="#collapseadmin" aria-expanded="true" aria-controls="collapseadmin">
                 <div class="text-center">
                     <img src="{{ asset('images/admin.jpeg') }}" width="40" class="rounded-circle">
@@ -36,6 +37,8 @@
                 </div>
             </div>
           </li>
+            </div>
+
 
         </ul>
       </div>

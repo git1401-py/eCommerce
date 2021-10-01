@@ -1,22 +1,22 @@
 @extends('admin.layouts.admin')
 
 @section('title')
-    inbox brands
+    inbox categories
 @endsection
 
 @section('content')
     <!-- cards  -->
     <section>
-        <div class="container-fluid" style="min-height:100vh;">
+        <div class="container-fluid"  style="min-height:100vh;">
             <div class="row">
                 <div class="col-xl-10 col-lg-9 col-md-8 mr-auto ml-0">
                     <div class="row pt-md-5 mt-md-3 mb-5">
 
                         <div class="col-xl-12 col-sm-12 p-3 bg-white">
                             <div class="d-flex justify-content-between mb-4">
-                                <h5 class="font-weight-bolder">لیست برندها ({{$brands->total() }})</h5>
-                                <a href="{{ route('admin.brands.create') }}" class="btn btn-sm btn-outline-primary">
-                                    <i class="fa fa-plus ml-1"></i>ایجاد برند
+                                <h5 class="font-weight-bolder">لیست دسته بندی ها ({{$categories->total() }})</h5>
+                                <a href="{{ route('admin.categories.create') }}" class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-plus ml-1"></i>ایجاد دسته بندی
                                 </a>
                             </div>
 
@@ -25,29 +25,43 @@
                                     <tr>
                                         <th>#</th>
                                         <th>نام</th>
+                                        <th>نام انگلیسی</th>
+                                        <th>والد</th>
                                         <th>وضعیت</th>
                                         <th>عملیات</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($brands as $key => $brand )
+                                    @foreach ($categories as $key => $category )
                                     <tr>
                                         <th>
-                                            {{ $brands->firstItem() + $key }}
+                                            {{ $categories->firstItem() + $key }}
                                         </th>
                                         <th>
-                                            {{ $brand->name }}
+                                            {{ $category->name }}
                                         </th>
                                         <th>
-                                            <span class="{{ $brand->getRawOriginal('is_active') ? 'text-success' : 'text-danger' }}">
-                                                {{ $brand->is_active }}
+                                            {{ $category->slug }}
+                                        </th>
+                                        <th>
+                                            @if ($category->parent_id == 0)
+                                                بدون والد
+                                            @else
+                                                {{ $category->parent->name }}
+                                            @endif
+
+                                        </th>
+                                        <th>
+                                            <span class="{{ $category->getRawOriginal('is_active') ? 'text-success' : 'text-danger' }}">
+                                                {{ $category->is_active }}
                                             </span>
                                         </th>
+
                                         <th>
-                                            <a href="{{ route('admin.brands.show' , ['brand' => $brand->id]) }}" class="btn btn-sm btn-outline-success" >
+                                            <a href="{{ route('admin.categories.show' , ['category' => $category->id]) }}" class="btn btn-sm btn-outline-success" >
                                                 نمایش
                                             </a>
-                                            <a href="{{ route('admin.brands.edit' , ['brand' => $brand->id]) }}" class="btn btn-sm text-info mr-2" >
+                                            <a href="{{ route('admin.categories.edit' , ['category' => $category->id]) }}" class="btn btn-sm text-info mr-2" >
                                                 <i class="fa fa-edit ml-1"></i>
                                             </a>
                                         </th>
@@ -57,7 +71,7 @@
                                 </tbody>
                             </table>
 
-                            <form action="{{ route('admin.brands.index') }}" method="GET">
+                            <form action="{{ route('admin.categories.index') }}" method="GET">
 
 
 

@@ -7,7 +7,7 @@
 @section('content')
     <!-- cards  -->
     <section>
-        <div class="container-fluid" style="height:84vh;">
+        <div class="container-fluid" style="min-height:100vh;">
             <div class="row">
                 <div class="col-xl-10 col-lg-9 col-md-8 mr-auto ml-0">
                     <div class="row pt-md-5 mt-md-3 mb-5">
@@ -21,7 +21,7 @@
                                 <div class="form-row d-flex align-items-center">
                                     <div class="form-group col-md-6">
                                         <label for="name">نام</label>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name">
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"  value="{{ old('name') }}">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="is_active">وضعیت</label>

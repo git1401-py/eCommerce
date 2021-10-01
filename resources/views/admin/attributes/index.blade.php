@@ -7,7 +7,7 @@
 @section('content')
     <!-- cards  -->
     <section>
-        <div class="container-fluid" style="min-height:84vh;">
+        <div class="container-fluid" style="min-height:100vh;">
             <div class="row">
                 <div class="col-xl-10 col-lg-9 col-md-8 mr-auto ml-0">
                     <div class="row pt-md-5 mt-md-3 mb-5">

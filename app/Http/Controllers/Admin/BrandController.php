@@ -103,6 +103,7 @@ class BrandController extends Controller
         alert()->success('برند مورد نظر ویرایش شد', 'با تشکر');
 
         return redirect()->route('admin.brands.index');
+        // return redirect()->back();
     }
 
     /**

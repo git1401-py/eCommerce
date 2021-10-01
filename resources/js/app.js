@@ -1,2 +1,3 @@
 require('./bootstrap');
-require('sweetalert')
+require('sweetalert');
+require('bootstrap-select');
