@@ -165,7 +165,7 @@
                                 <div class="form-row d-flex align-items-center">
                                     <div class="form-group col-md-3">
                                         <label for="name">نام</label>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                        <input type="text" class="form-control"
                                             id="name" name="name" value="{{ old('name') }}">
                                     </div>
                                     <div class="form-group col-md-3 small text-muted">
@@ -274,12 +274,12 @@
                                                             </div>
                                                             <div class="form-group col-md-3">
                                                                 <label>قیمت</label>
-                                                                <input type="text" class="form-control"
+                                                                <input type="number" class="form-control"
                                                                      name="variation_values[price][]">
                                                             </div>
                                                             <div class="form-group col-md-3">
                                                                 <label>تعداد</label>
-                                                                <input type="text" class="form-control"
+                                                                <input type="number" class="form-control"
                                                                      name="variation_values[quantity][]">
                                                             </div>
                                                             <div class="form-group col-md-3">
@@ -301,12 +301,12 @@
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="delivery_amount">هزینه ارسال</label>
-                                        <input type="text" class="form-control"
+                                        <input type="number" class="form-control"
                                             id="delivery_amount" name="delivery_amount" value="{{ old('delivery_amount') }}">
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="delivery_amount_per_product">هزینه ارسال به ازای محصول اضافی</label>
-                                        <input type="text" class="form-control"
+                                        <input type="number" class="form-control"
                                             id="delivery_amount_per_product" name="delivery_amount_per_product" value="{{ old('delivery_amount_per_product') }}">
                                     </div>
                                     <div class="form-group col-md-3"></div>
