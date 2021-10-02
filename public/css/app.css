@@ -11665,3 +11665,15 @@ body {
   text-align: right !important;
   font-family: "Vazir" !important;
 }
+
+.custom-file-label::after {
+  content: "فایل";
+}
+
+.custom-file-label:after {
+  right: unset;
+  left: 0;
+  border-left: unset;
+  border-right: inherit;
+  border-radius: 0.35rem 0 0 0.35rem;
+}
