@@ -10,4 +10,6 @@ class ProductVariation extends Model
     use HasFactory;
     protected $table = "product_variations";
     protected $guarded = [];
+
+
 }

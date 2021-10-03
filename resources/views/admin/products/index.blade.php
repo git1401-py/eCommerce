@@ -37,12 +37,12 @@
                                             {{ $products->firstItem() + $key }}
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.products.show' , ['product' => $product->id]) }}" class="btn btn-sm btn-outline-success" >
+                                            <a href="{{ route('admin.products.show' , ['product' => $product->id]) }}" class="text-decoration-none" >
                                                 {{ $product->name }}
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.brands.show' , ['brand' => $product->brand->id]) }}" class="btn btn-sm btn-outline-success" >
+                                            <a href="{{ route('admin.brands.show' , ['brand' => $product->brand->id]) }}" class="text-decoration-none" >
                                                 {{ $product->brand->name }}
                                             </a>
                                         </td>
