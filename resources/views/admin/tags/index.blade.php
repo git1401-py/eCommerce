@@ -31,21 +31,21 @@
                                 <tbody>
                                     @foreach ($tags as $key => $tag )
                                     <tr>
-                                        <th>
+                                        <td>
                                             {{ $tags->firstItem() + $key }}
-                                        </th>
-                                        <th>
+                                        </td>
+                                        <td>
                                             {{ $tag->name }}
-                                        </th>
+                                        </td>
 
-                                        <th>
+                                        <td>
                                             <a href="{{ route('admin.tags.show' , ['tag' => $tag->id]) }}" class="btn btn-sm btn-outline-success" >
                                                 نمایش
                                             </a>
                                             <a href="{{ route('admin.tags.edit' , ['tag' => $tag->id]) }}" class="btn btn-sm text-info mr-2" >
                                                 <i class="fa fa-edit ml-1"></i>
                                             </a>
-                                        </th>
+                                        </td>
                                     </tr>
 
                                     @endforeach
@@ -55,6 +55,9 @@
                         </div>
 
 
+                    </div>
+                    <div class="row d-flex justify-content-center mt-5">
+                        {{ $tags->render() }}
                     </div>
                 </div>
             </div>

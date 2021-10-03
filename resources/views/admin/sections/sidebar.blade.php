@@ -19,8 +19,8 @@
             </a>
             <div id="collapseProduct" class="collapse mr-5" data-parent="#accordionSidebar">
                 <div class="collapse-item-link bg-licollapse-sidebaght py-2 collapse-inner rounded bg-light">
-                    {{-- <a class="nav-link text-dark p-3 sidebar-link collapse-item"
-                        href="{{ route('admin.products.index') }}">لیست محصولات</a> --}}
+                    <a class="nav-link text-dark p-3 sidebar-link collapse-item"
+                        href="{{ route('admin.products.index') }}">لیست محصولات</a>
                     {{-- <a class="nav-link text-dark p-3 sidebar-link collapse-item"
                         href="{{ route('admin.comments.index') }}">لیست کامنت ها</a> --}}
                     <a class="nav-link text-dark p-3 sidebar-link collapse-item"

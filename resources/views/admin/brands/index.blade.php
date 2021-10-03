@@ -11,7 +11,6 @@
             <div class="row">
                 <div class="col-xl-10 col-lg-9 col-md-8 mr-auto ml-0">
                     <div class="row pt-md-5 mt-md-3 mb-5">
-
                         <div class="col-xl-12 col-sm-12 p-3 bg-white">
                             <div class="d-flex justify-content-between mb-4">
                                 <h5 class="font-weight-bolder">لیست برندها ({{$brands->total() }})</h5>
@@ -32,25 +31,25 @@
                                 <tbody>
                                     @foreach ($brands as $key => $brand )
                                     <tr>
-                                        <th>
+                                        <td>
                                             {{ $brands->firstItem() + $key }}
-                                        </th>
-                                        <th>
+                                        </td>
+                                        <td>
                                             {{ $brand->name }}
-                                        </th>
-                                        <th>
+                                        </td>
+                                        <td>
                                             <span class="{{ $brand->getRawOriginal('is_active') ? 'text-success' : 'text-danger' }}">
                                                 {{ $brand->is_active }}
                                             </span>
-                                        </th>
-                                        <th>
+                                        </td>
+                                        <td>
                                             <a href="{{ route('admin.brands.show' , ['brand' => $brand->id]) }}" class="btn btn-sm btn-outline-success" >
                                                 نمایش
                                             </a>
                                             <a href="{{ route('admin.brands.edit' , ['brand' => $brand->id]) }}" class="btn btn-sm text-info mr-2" >
                                                 <i class="fa fa-edit ml-1"></i>
                                             </a>
-                                        </th>
+                                        </td>
                                     </tr>
 
                                     @endforeach
@@ -63,8 +62,9 @@
 
                             </form>
                         </div>
-
-
+                    </div>
+                    <div class="row d-flex justify-content-center mt-5">
+                        {{ $brands->render() }}
                     </div>
                 </div>
             </div>

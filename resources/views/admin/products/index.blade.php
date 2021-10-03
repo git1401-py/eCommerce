@@ -14,9 +14,9 @@
 
                         <div class="col-xl-12 col-sm-12 p-3 bg-white">
                             <div class="d-flex justify-content-between mb-4">
-                                <h5 class="font-weight-bolder">لیست ویژگی ها ({{$products->total() }})</h5>
+                                <h5 class="font-weight-bolder">لیست محصول ها ({{$products->total() }})</h5>
                                 <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-outline-primary">
-                                    <i class="fa fa-plus ml-1"></i>ایجاد ویژگی
+                                    <i class="fa fa-plus ml-1"></i>ایجاد محصول
                                 </a>
                             </div>
 
@@ -25,48 +25,66 @@
                                     <tr>
                                         <th>#</th>
                                         <th>نام</th>
+                                        <th>نام دسته بندی</th>
+                                        <th>وضعیت</th>
                                         <th>عملیات</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($products as $key => $product )
                                     <tr>
-                                        <th>
+                                        <td>
                                             {{ $products->firstItem() + $key }}
-                                        </th>
-                                        <th>
-                                            {{ $product->name }}
-                                        </th>
-
-                                        <th>
+                                        </td>
+                                        <td>
                                             <a href="{{ route('admin.products.show' , ['product' => $product->id]) }}" class="btn btn-sm btn-outline-success" >
-                                                نمایش
+                                                {{ $product->name }}
                                             </a>
-                                            <a href="{{ route('admin.products.edit' , ['product' => $product->id]) }}" class="btn btn-sm text-info mr-2" >
-                                                <i class="fa fa-edit ml-1"></i>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('admin.brands.show' , ['brand' => $product->brand->id]) }}" class="btn btn-sm btn-outline-success" >
+                                                {{ $product->brand->name }}
                                             </a>
-                                        </th>
-                                    </tr>
+                                        </td>
+                                        <td>
+                                            {{-- @php
+                                                $category = \App\Models\Category::find($product->category_id);
+                                            @endphp
+                                            {{ $category->name }} --}}
 
+                                            {{ $product->category->name }}
+                                        </td>
+                                        <td>
+                                            <span class="{{ $product->getRawOriginal('is_active') ? 'text-success' : 'text-danger' }}">
+                                                {{ $product->is_active }}
+                                            </span>
+                                        </td>
+
+
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="{{ $product->id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    عملیات
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="{{ $product->id }}">
+                                                  <li><a class="dropdown-item" href="#">ویرایش محصول</a></li>
+                                                  <li><a class="dropdown-item" href="#">ویرایش تصاویر</a></li>
+                                                  <li><a class="dropdown-item" href="#">ویرایش دسته بندی و ویژگی</a></li>
+                                                </ul>
+                                              </div>
+                                        </td>
+                                    </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-
-                            <form action="{{ route('admin.products.index') }}" method="GET">
-
-
-
-                            </form>
                         </div>
-
-
+                    </div>
+                    <div class="row d-flex justify-content-center mt-5">
+                        {{ $products->render() }}
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- End of cards -->
-
-
-
 @endsection

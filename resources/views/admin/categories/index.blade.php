@@ -34,37 +34,37 @@
                                 <tbody>
                                     @foreach ($categories as $key => $category )
                                     <tr>
-                                        <th>
+                                        <td>
                                             {{ $categories->firstItem() + $key }}
-                                        </th>
-                                        <th>
+                                        </td>
+                                        <td>
                                             {{ $category->name }}
-                                        </th>
-                                        <th>
+                                        </td>
+                                        <td>
                                             {{ $category->slug }}
-                                        </th>
-                                        <th>
+                                        </td>
+                                        <td>
                                             @if ($category->parent_id == 0)
                                                 بدون والد
                                             @else
                                                 {{ $category->parent->name }}
                                             @endif
 
-                                        </th>
-                                        <th>
+                                        </td>
+                                        <td>
                                             <span class="{{ $category->getRawOriginal('is_active') ? 'text-success' : 'text-danger' }}">
                                                 {{ $category->is_active }}
                                             </span>
-                                        </th>
+                                        </td>
 
-                                        <th>
+                                        <td>
                                             <a href="{{ route('admin.categories.show' , ['category' => $category->id]) }}" class="btn btn-sm btn-outline-success" >
                                                 نمایش
                                             </a>
                                             <a href="{{ route('admin.categories.edit' , ['category' => $category->id]) }}" class="btn btn-sm text-info mr-2" >
                                                 <i class="fa fa-edit ml-1"></i>
                                             </a>
-                                        </th>
+                                        </td>
                                     </tr>
 
                                     @endforeach
@@ -79,6 +79,9 @@
                         </div>
 
 
+                    </div>
+                    <div class="row d-flex justify-content-center mt-5">
+                        {{ $categories->render() }}
                     </div>
                 </div>
             </div>
