@@ -7,6 +7,9 @@ use App\Http\Controllers\Admin\ProductImageController;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductAttribute;
+use App\Models\ProductImage;
+use App\Models\ProductVariation;
 use App\Models\Tag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -46,56 +49,70 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required',
-        //     'brand_id' => 'required',
-        //     'is_active' => 'required',
-        //     'tag_ids' => 'required',
-        //     'description' => 'required',
-        //     'primary_image' => 'required|mimes:jpg,jpeg,png,svg',
-        //     'images' => 'required',
-        //     'images.*' => 'mimes:jpg,jpeg,png,svg',
-        //     'category_id' => 'required',
-        //     'attribute_ids' => 'required',
-        //     'attribute_ids.*' => 'required',
-        //     'variation_values' => 'required',
-        //     'variation_values.*.*' => 'required',
-        //     'variation_values.price.*' => 'integer',
-        //     'variation_values.quantity.*' => 'integer',
-        //     'delivery_amount' => 'required|integer',
-        //     'delivery_amount_per_product' => 'nullable|integer',
-        // ]);
+        $request->validate([
+            'name' => 'required',
+            'brand_id' => 'required',
+            'is_active' => 'required',
+            'tag_ids' => 'required',
+            'description' => 'required',
+            'primary_image' => 'required|mimes:jpg,jpeg,png,svg',
+            'images' => 'required',
+            'images.*' => 'mimes:jpg,jpeg,png,svg',
+            'category_id' => 'required',
+            'attribute_ids' => 'required',
+            'attribute_ids.*' => 'required',
+            'variation_values' => 'required',
+            'variation_values.*.*' => 'required',
+            'variation_values.price.*' => 'integer',
+            'variation_values.quantity.*' => 'integer',
+            'delivery_amount' => 'required|integer',
+            'delivery_amount_per_product' => 'nullable|integer',
+        ]);
 
-        // try{
-        //     DB::beginTransaction();
-            $product = new Product();
+        try{
+            DB::beginTransaction();
 
-            $ProductImageController = new ProductImageController;
-            $fileNamePrimaryImage = $ProductImageController->upload($request->primary_image , $request->images);
+        $ProductImageController = new ProductImageController;
+        $fileNameImages = $ProductImageController->upload($request->primary_image , $request->images);
 
-            dd($fileNamePrimaryImage);
-            // $product->name = $request->name;
+        $product = new Product();
+        $product->name = $request->name;
+        $product->brand_id = $request->brand_id;
+        $product->is_active = $request->is_active;
+        $product->description = $request->description;
+        $product->primary_image = $fileNameImages['fileNamePrimaryImage'];
+        $product->category_id = $request->category_id;
+        $product->delivery_amount = $request->delivery_amount;
+        $product->delivery_amount_per_product = $request->delivery_amount_per_product;
 
-            // $product->save();
+        $product->save();
 
+        foreach($fileNameImages['fileNameImages'] as $fileNameImage){
+            $product_image = new ProductImage();
+            $product_image->product_id = $product->id;
+            $product_image->image = $fileNameImage;
 
-        //     foreach($request->attribute_ids as $attributeId){
-        //         $attribute = Attribute::findOrFail($attributeId);
-        //         $attribute->categories()->attach($category->id , [
-        //         'is_filter' => in_array($attributeId, $request->attribute_is_filter_ids) ? 1 : 0 ,
-        //         'is_variation' => $request->variation_id == $attributeId ? 1 : 0
-        //         ]);
-        // }
-        // DB::commit();
-        // } catch (\Exception $ex) {
-        //     DB::rollBack();
-        //     alert()->error('مشکل در ایجاد محصول', $ex->getMessage())->persistent('حله');
-        //     return redirect()->back();
-        // }
+            $product_image->save();
+        }
 
-        // alert()->success('محصول مورد نظر ایجاد شد', 'با تشکر');
-        // return redirect()->route('admin.products.index');
-        // dd($request->all());
+        $ProductAttributeController = new ProductAttributeController();
+        $ProductAttributeController->store($request->attribute_ids , $product);
+
+        $attributeId = (Category::find($request->category_id))->attributes()->wherePivot('is_variation' , 1)->first()->id;
+        $ProductVariationController = new ProductVariationController();
+        $ProductVariationController->store($request->variation_values , $attributeId , $product);
+
+        $product->tags()->attach($request->tag_ids);
+
+        DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            alert()->error('مشکل در ایجاد محصول', $ex->getMessage())->persistent('حله');
+            return redirect()->back();
+        }
+
+        alert()->success('محصول مورد نظر ایجاد شد', 'با تشکر');
+        return redirect()->route('admin.products.index');
     }
 
     /**

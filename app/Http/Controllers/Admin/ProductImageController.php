@@ -18,6 +18,6 @@ class ProductImageController extends Controller
             $image->move(public_path(env('PRODUCT_IMAGES_UPLOAD_PATH')) , $fileNameImage);
             array_push($fileNameImages , $fileNameImage);
         }
-        return ['fileNamePrimaryImage' => $fileNamePrimaryImage , '$fileNameImages' => $fileNameImages];
+        return ['fileNamePrimaryImage' => $fileNamePrimaryImage , 'fileNameImages' => $fileNameImages];
     }
 }
