@@ -151,116 +151,115 @@
 @section('content')
     <!-- cards  -->
     <section>
-        <div class="container-fluid" style="min-height:100vh;">
+        <div class="container-fluid bg-white" style="min-height:100vh;">
             <div class="row">
-                <div class="col-xl-10 col-lg-9 col-md-8 mr-auto ml-0">
+                <div class="col-12">
                     <div class="row pt-md-5 mt-md-3 mb-5">
 
                         <div class="col-xl-12 col-sm-12 mb-4 p-3 bg-white">
                             <h5 class="font-weight-bolder">محصول {{ $product->name }}: </h5>
                             <hr>
-                                <div class="form-row d-flex align-items-center">
-                                    <div class="form-group col-md-3">
+                                <div class="row">
+                                    <div class="form-group col-md-3 mb-3">
                                         <label>نام</label>
                                         <input type="text" class="form-control" value="{{ $product->name }}" disabled>
                                     </div>
-                                    <div class="form-group col-md-3 small text-muted">
+                                    <div class="form-group col-md-3 mb-3 small text-muted">
                                         <label>برند</label>
                                         <input type="text" class="form-control" value="{{ $product->brand->name }}" disabled>
                                     </div>
-                                    <div class="form-group col-md-3 small text-muted">
+                                    <div class="form-group col-md-3 mb-3 small text-muted">
                                         <label>دسته بندی</label>
                                         <input type="text" class="form-control" value="{{ $product->category->name }}" disabled>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3 mb-3">
                                         <label >وضعیت</label>
                                         <input type="text" class="form-control {{ $product->getRawOriginal('is_active') ? 'text-success' : 'text-danger' }}" value="{{ $product->is_active }}" disabled>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3 mb-3">
                                         <label >تاریخ ایجاد</label>
                                         <input type="text" class="form-control" style="font-size:12px" value="{{ verta($product->created_at)->format('Y/n/j H:i') }}" disabled>
                                     </div>
 
-                                    <div class="form-group col-md-12 small text-muted">
+                                    <div class="form-group col-md-12 mb-3 small text-muted">
                                         <label>توضیحات</label>
                                         <textarea rows="2" class="form-control" disabled>{{ $product->description }}</textarea>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 mb-3">
                                         <hr>
                                         <p> هزینه ارسال : </p>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3 mb-3">
                                         <label>هزینه ارسال</label>
                                         <input type="text" class="form-control" value="{{ $product->delivery_amount }}" disabled>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3 mb-3">
                                         <label>هزینه ارسال به ازای محصول اضافی</label>
                                         <input type="text" class="form-control" value="{{ $product->delivery_amount_per_product }}" disabled>
                                     </div>
-                                    <div class="form-group col-md-3"></div>
-                                    <div class="form-group col-md-3"></div>
+                                    <div class="form-group col-md-3 mb-3"></div>
+                                    <div class="form-group col-md-3 mb-3"></div>
 
                                     {{-- Product Attributes & Variations --}}
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 mb-3">
                                         <hr>
                                         <p>ویژگی ها: </p>
                                     </div>
                                     @foreach ( $productAttributes as $productAttribute)
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3 mb-3">
                                         <label>{{ $productAttribute->attribute->name}}</label>
                                         <input type="text" class="form-control" value="{{ $productAttribute->value }}" disabled>
                                     </div>
                                     @endforeach
                                     @foreach ( $productVariations as $variation)
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 mb-3">
                                         <hr>
                                         <div class="d-flex">
                                             <p class="mb-0"> قیمت و موجودی برای متغیر ( {{ $variation->value }} ) : </p>
                                             <p class="mb-0 me-3">
-                                                <button class="btn btn-sm btn-primary"
-                                                        data-toggle="collapse"
-                                                        data-target="#collapse-{{$variation->id}}"
-                                                        >
+                                                <a class="btn btn-sm btn-primary" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapse-{{ $variation->id }}"
+                                                        role="button" aria-expanded="false" aria-controls="collapse-{{ $variation->id }}">
                                                         نمایش
-                                                </button>
+                                                    </a>
                                             </p>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12">
-                                        <div class="collapse mt-2" id="collapse-{{$variation->id}}">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="collapse multi-collapse mt-2" id="collapse-{{$variation->id}}">
                                             <div class="card card-body">
                                                 <div class="row">
-                                                    <div class="form-group col-md-4">
+                                                    <div class="form-group col-md-4 mb-3">
                                                         <label class="small">قیمت</label>
                                                         <input type="text" disabled class="form-control" value="{{ $variation->price }}">
                                                     </div>
 
-                                                    <div class="form-group col-md-4">
+                                                    <div class="form-group col-md-4 mb-3">
                                                         <label class="small">تعداد</label>
                                                         <input type="text" disabled class="form-control" value="{{ $variation->quantity }}">
                                                     </div>
 
-                                                    <div class="form-group col-md-4">
+                                                    <div class="form-group col-md-4 mb-3">
                                                         <label class="small">شناسه انبار</label>
                                                         <input type="text" disabled class="form-control" value="{{ $variation->sku }}">
                                                     </div>
 
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-12 mb-3">
                                                         <p>حراج :</p>
                                                     </div>
-                                                    <div class="form-group col-md-4">
+                                                    <div class="form-group col-md-4 mb-3">
                                                         <label class="small">قیمت حراجی</label>
                                                         <input type="text" disabled class="form-control" value="{{ $variation->sale_price }}">
                                                     </div>
 
-                                                    <div class="form-group col-md-4">
+                                                    <div class="form-group col-md-4 mb-3">
                                                         <label class="small">تاریخ شروع حراجی</label>
                                                         <input type="text" disabled class="form-control"
                                                         value="{{ $variation->date_on_sale_from == null ? null : verta($variation->date_on_sale_from) }}">
                                                     </div>
 
-                                                    <div class="form-group col-md-4">
+                                                    <div class="form-group col-md-4 mb-3">
                                                         <label class="small">تاریخ پایان حراجی</label>
                                                         <input type="text" disabled class="form-control"
                                                         value="{{ $variation->date_on_sale_to == null ? null : verta($variation->date_on_sale_to) }}">
@@ -274,26 +273,26 @@
                                     @endforeach
 
                                     {{-- Product Image Section --}}
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 mb-3">
                                         <hr>
                                         <p>«تصاویر محصول» </p>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 mb-3">
                                         <p>تصویر اصلی : </p>
 
-                                        <div class="col-md-3 my-2">
+                                        <div class="col-md-3 mb-3 my-2">
                                             <div class="card">
                                                 <img class="card-img-top"  src="{{ url(env('PRODUCT_IMAGES_UPLOAD_PATH') . $product->primary_image) }}" alt="{{ $product->name }}">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 ">
+                                    <div class="col-md-12  mb-3">
                                         <hr>
                                         <p>سایر تصایر : </p>
                                         <div class="position-relative d-flex  flex-grow-0 flex-wrap align-items-center" id="imagesShow">
 
                                             @foreach ($images as $image)
-                                                <div class="col-md-3 my-2">
+                                                <div class="col-md-3 mb-3 my-2">
                                                     <div class="card">
                                                         <img class="card-img-top"  src="{{ url(env('PRODUCT_IMAGES_UPLOAD_PATH') . $image->image) }}" alt="{{ $product->name }}">
                                                     </div>
@@ -306,13 +305,13 @@
 
 
 
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6 mb-3">
                                         <button type="submit" class="btn btn-outline-primary">ثبت</button>
                                     </div>
-                                    <div class="form-group col-md-4 me-auto">
+                                    <div class="form-group col-md-4 mb-3 me-auto">
 
                                     </div>
-                                    <div class="form-group col-md-2 me-auto">
+                                    <div class="form-group col-md-2 mb-3 me-auto">
                                         <a href="{{ route('admin.products.index') }}" class="btn btn-dark"> بازگشت </a>
                                     </div>
                                 </div>

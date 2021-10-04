@@ -5,14 +5,17 @@
 
 @import '~bootstrap-select/sass/bootstrap-select.scss';
 
+@import '~md.bootstrappersiandatetimepicker/dist/mds.bs.datetimepicker.style.css';
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css);
+
 @font-face {
     font-family: "Vazir";
-    src: url("../fonts/Vazir.eot");
+    src: url("../../fonts/Vazir.eot");
     /* IE9 Compat Modes */
-    src: url("../fonts/Vazir.eot?#iefix") format("embedded-opentype"),
-      url("../fonts/Vazir.woff2") format("woff2"),
-      url("../fonts/Vazir.woff") format("woff"),
-      url("../fonts/Vazir.ttf") format("truetype");
+    src: url("../../fonts/Vazir.eot?#iefix") format("embedded-opentype"),
+      url("../../fonts/Vazir.woff2") format("woff2"),
+      url("../../fonts/Vazir.woff") format("woff"),
+      url("../../fonts/Vazir.ttf") format("truetype");
     /* Safari, Android, iOS */
   }
 

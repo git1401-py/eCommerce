@@ -151,9 +151,9 @@
 @section('content')
     <!-- cards  -->
     <section>
-        <div class="container-fluid" style="min-height:100vh;">
+        <div class="container-fluid bg-white" style="min-height:100vh;">
             <div class="row">
-                <div class="col-xl-10 col-lg-9 col-md-8 mr-auto ml-0">
+                <div class="col-12">
                     <div class="row pt-md-5 mt-md-3 mb-5">
 
                         <div class="col-xl-12 col-sm-12 mb-4 p-3 bg-white">
@@ -162,13 +162,13 @@
                             @include('admin.sections.errors')
                             <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <div class="form-row d-flex align-items-center">
-                                    <div class="form-group col-md-3">
+                                <div class="row">
+                                    <div class="form-group col-md-3 mb-3">
                                         <label for="name">نام</label>
                                         <input type="text" class="form-control"
                                             id="name" name="name" value="{{ old('name') }}">
                                     </div>
-                                    <div class="form-group col-md-3 small text-muted">
+                                    <div class="form-group col-md-3 mb-3 small text-muted">
                                         <label for="brand_id">برند</label>
                                         <div style="font-size:10px;">
                                             <select class="js-brand js-states form-control p-0 w-100" dir="rtl"
@@ -179,14 +179,14 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3 mb-3">
                                         <label for="is_active">وضعیت</label>
                                         <select class="form-control" id="is_active" name="is_active">
                                             <option value="1" selected> فعال </option>
                                             <option value="0"> غیر فعال </option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-3 small text-muted">
+                                    <div class="form-group col-md-3 mb-3 small text-muted">
                                         <label for="tag_ids">تگ</label>
                                         <div style="font-size:10px;">
                                             <select class="js-tag js-states form-control p-0 w-100" dir="rtl" language="fa"
@@ -197,19 +197,19 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-12 small text-muted">
+                                    <div class="form-group col-md-12 mb-3 small text-muted">
                                         <label for="description">توضیحات</label>
                                         <textarea rows="2" class="form-control" id="description"
                                             name="description">{{ old('description') }}</textarea>
                                     </div>
 
                                     {{-- Product Image Section --}}
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 mb-3">
                                         <hr>
                                         <p>تصاویر محصول : </p>
                                     </div>
 
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3 mb-3">
                                         <label for="primary_image">انتخاب تصویر اصلی</label>
                                         <div class="custom-file">
                                             <input type="file" name="primary_image" id="primary_image"
@@ -217,11 +217,11 @@
                                             <label for="primary_image" class="custom-file-label">انتخاب فایل</label>
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-9">
+                                    <div class="form-group col-md-9 mb-3">
                                         <div class="position-relative" id="imageShow"></div>
                                     </div>
 
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3 mb-3">
                                         <label for="images">انتخاب تصاویر</label>
                                         <div class="custom-file">
                                             <input type="file" name="images[]" multiple id="images"
@@ -229,7 +229,7 @@
                                             <label for="images" class="custom-file-label">انتخاب فایل ها</label>
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-9">
+                                    <div class="form-group col-md-9 mb-3">
                                         <div class="position-relative d-flex  flex-grow-0 flex-wrap align-items-center" id="imagesShow"></div>
                                     </div>
 
@@ -239,7 +239,7 @@
                                         <p>دسته بندی و ویژگی ها : </p>
                                     </div>
 
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 mb-3">
                                         <div class="row justify-content-center">
                                             <div class="form-group col-md-3 small text-muted">
                                                 <label for="category_id">دسته بندی</label>
@@ -255,7 +255,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12" id="attributesContainer">
+                                    <div class="col-md-12 mb-3" id="attributesContainer">
                                         <div class="row" id="attributes"></div>
                                          {{-- Variation Section --}}
                                         <div class="col-md-12">
@@ -267,22 +267,22 @@
                                                 <div id="first">
                                                     <div class="recordset">
                                                         <div class="row">
-                                                            <div class="form-group col-md-3">
+                                                            <div class="form-group col-md-3 mb-3">
                                                                 <label>نام</label>
                                                                 <input type="text" class="form-control"
                                                                      name="variation_values[value][]">
                                                             </div>
-                                                            <div class="form-group col-md-3">
+                                                            <div class="form-group col-md-3 mb-3">
                                                                 <label>قیمت</label>
                                                                 <input type="number" class="form-control"
                                                                      name="variation_values[price][]">
                                                             </div>
-                                                            <div class="form-group col-md-3">
+                                                            <div class="form-group col-md-3 mb-3">
                                                                 <label>تعداد</label>
                                                                 <input type="number" class="form-control"
                                                                      name="variation_values[quantity][]">
                                                             </div>
-                                                            <div class="form-group col-md-3">
+                                                            <div class="form-group col-md-3 mb-3">
                                                                 <label>شناسه انبار</label>
                                                                 <input type="text" class="form-control"
                                                                      name="variation_values[sku][]">
@@ -295,33 +295,33 @@
                                     </div>
 
                                     {{-- Delivery Section --}}
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 mb-3">
                                         <hr>
                                         <p> هزینه ارسال : </p>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3 mb-3">
                                         <label for="delivery_amount">هزینه ارسال</label>
                                         <input type="number" class="form-control"
                                             id="delivery_amount" name="delivery_amount" value="{{ old('delivery_amount') }}">
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3 mb-3">
                                         <label for="delivery_amount_per_product">هزینه ارسال به ازای محصول اضافی</label>
                                         <input type="number" class="form-control"
                                             id="delivery_amount_per_product" name="delivery_amount_per_product" value="{{ old('delivery_amount_per_product') }}">
                                     </div>
-                                    <div class="form-group col-md-3"></div>
-                                    <div class="form-group col-md-3"></div>
+                                    <div class="form-group col-md-3 mb-3"></div>
+                                    <div class="form-group col-md-3 mb-3"></div>
 
 
 
 
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6 mb-3">
                                         <button type="submit" class="btn btn-outline-primary">ثبت</button>
                                     </div>
-                                    <div class="form-group col-md-4 me-auto">
+                                    <div class="form-group col-md-4 mb-3 me-auto">
 
                                     </div>
-                                    <div class="form-group col-md-2 me-auto">
+                                    <div class="form-group col-md-2 mb-3 me-auto">
                                         <a href="{{ route('admin.products.index') }}" class="btn btn-dark"> بازگشت </a>
                                     </div>
                                 </div>

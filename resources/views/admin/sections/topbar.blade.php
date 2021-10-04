@@ -1,4 +1,4 @@
-<div class="col-xl-10 col-lg-9 col-md-8 mr-auto bg-dark fixed-top py-2 top-navbar">
+<div class="col-xl-10 col-lg-9 col-md-8 me-auto bg-dark fixed-top py-2 top-navbar">
 
     <div class="row align-items-center">
       <div class="col-md-3 ">

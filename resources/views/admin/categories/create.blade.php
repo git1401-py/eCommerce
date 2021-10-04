@@ -64,9 +64,9 @@
 @section('content')
     <!-- cards  -->
     <section>
-        <div class="container-fluid" style="min-height:100vh;">
+        <div class="container-fluid bg-white" style="min-height:100vh;">
             <div class="row">
-                <div class="col-xl-10 col-lg-9 col-md-8 mr-auto ml-0">
+                <div class="col-12">
                     <div class="row pt-md-5 mt-md-3 mb-5">
 
                         <div class="col-xl-12 col-sm-12 mb-4 p-3 bg-white">
@@ -76,17 +76,17 @@
                             <form action="{{ route('admin.categories.store') }}" method="POST">
                             {{-- <form action="{{ route('admin.categories.store') }}" method="POST"> --}}
                                 @csrf
-                                <div class="form-row d-flex align-items-center">
+                                <div class="row">
 
-                                    <div class="form-group col-md-3 small text-muted">
+                                    <div class="form-group col-md-3 mb-3 small text-muted">
                                         <label for="name">نام</label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
                                     </div>
-                                    <div class="form-group col-md-3 small text-muted">
+                                    <div class="form-group col-md-3 mb-3 small text-muted">
                                         <label for="slug">نام انگلیسی</label>
                                         <input type="text" class="form-control" @error('name') is-invalid @enderror" id="slug" name="slug"  value="{{ old('slug') }}">
                                     </div>
-                                    <div class="form-group col-md-3 small text-muted">
+                                    <div class="form-group col-md-3 mb-3 small text-muted">
                                         <label for="parent_id">والد</label>
                                         <select class="form-control" id="parent_id" name="parent_id">
                                             <option value="0" selected> بدون والد </option>
@@ -95,7 +95,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-3 small text-muted">
+                                    <div class="form-group col-md-3 mb-3 small text-muted">
                                         <label for="is_active">وضعیت</label>
                                         <select class="form-control" id="is_active" name="is_active">
                                             <option value="1" selected> فعال </option>
@@ -103,7 +103,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group col-md-3 small text-muted">
+                                    <div class="form-group col-md-3 mb-3 small text-muted">
                                         <label for="attribute_ids">ویژگی ها</label>
                                         <div style="font-size:10px;">
                                             <select class="js-attribue js-states form-control p-0 w-100"
@@ -115,7 +115,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-md-3 small text-muted">
+                                    <div class="form-group col-md-3 mb-3 small text-muted">
                                         <label for="attribute_is_filter_ids">انتخاب ویژگی های قابل فیلتر</label>
                                         <div style="font-size:10px;">
                                             <select class="js-filter js-states form-control p-0 w-100"
@@ -125,7 +125,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-md-3 small text-muted">
+                                    <div class="form-group col-md-3 mb-3 small text-muted">
                                         <label for="variation_ids">انتخاب ویژگی های متغیر</label>
                                         <div style="font-size:10px;">
                                             <select class="js-variable js-states form-control p-0 w-100"
@@ -135,22 +135,22 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-md-3 small text-muted">
+                                    <div class="form-group col-md-3 mb-3 small text-muted">
                                         <label for="icon">آیکون</label>
                                         <input type="text" class="form-control" id="icon" name="icon" value="{{ old('icon') }}">
                                     </div>
-                                    <div class="form-group col-md-12 small text-muted">
+                                    <div class="form-group col-md-12 mb-3 small text-muted">
                                         <label for="description">توضیحات</label>
                                         <textarea rows="2" class="form-control" id="description" name="description" >{{ old('description') }}</textarea>
                                     </div>
 
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6 mb-3">
                                         <button type="submit" class="btn btn-outline-primary">ثبت</button>
                                     </div>
-                                    <div class="form-group col-md-4 me-auto">
+                                    <div class="form-group col-md-4 mb-3 me-auto">
 
                                     </div>
-                                    <div class="form-group col-md-2 me-auto">
+                                    <div class="form-group col-md-2 mb-3 me-auto">
                                         <a href="{{ route('admin.categories.index') }}" class="btn btn-dark"> بازگشت </a>
                                     </div>
                                 </div>

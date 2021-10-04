@@ -109,9 +109,13 @@ class ProductController extends Controller
         return view('admin.products.show' , compact('product' , 'productAttributes' , 'productVariations' , 'images'));
     }
 
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        $brands = Brand::all();
+        $tags = Tag::all();
+        $productAttributes = $product->attributes()->with('attribute')->get();
+        $productVariations = $product->variations;
+        return view('admin.products.edit' , compact('product' ,'brands' , 'tags' , 'productAttributes' , 'productVariations'));
     }
 
     public function update(Request $request, $id)
