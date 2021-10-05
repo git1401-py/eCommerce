@@ -5,9 +5,11 @@
 
 @import '~bootstrap-select/sass/bootstrap-select.scss';
 
+// @import '~md.bootstrappersiandatetimepicker/dist/jquery.md.bootstrap.datetimepicker.style.css';
 @import '~md.bootstrappersiandatetimepicker/dist/mds.bs.datetimepicker.style.css';
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css);
 
+@import 'kamadatepicker.min.css';
 @font-face {
     font-family: "Vazir";
     src: url("../../fonts/Vazir.eot");
@@ -24,14 +26,39 @@
     text-align: right !important;
     font-family: "Vazir" !important;
   }
+  .div-disabled{
+      background-color: #eaecf4;
+  }
 
-  .custom-file-label::after{
-    content:"فایل";
-}
-.custom-file-label:after{
-    right: unset;
-    left: 0;
-    border-left: unset;
-    border-right: inherit;
-    border-radius: 0.35rem 0 0 0.35rem;
+//   .custom-file-label::after{
+//     content:"فایل";
+// }
+// .custom-file-label:after{
+//     right: unset;
+//     left: 0;
+//     border-left: unset;
+//     border-right: inherit;
+//     border-radius: 0.35rem 0 0 0.35rem;
+// }
+.custom-file-input {
+    width: 0px;
+    height: 0px;
+
+    visibility: hidden;
+  }
+  .custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  .custom-file-label {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #000;
+    // filter: grayscale(100);
+    border-radius: 5px;
+    margin: 0px 0px 10px 10px;
+    cursor: pointer;
+    // background: url("../images/admin/imgUpload.png") no-repeat center center;
+  }
+.mds-bs-dtp-container {
+    min-width: fit-content !important;
 }

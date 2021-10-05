@@ -118,9 +118,57 @@ class ProductController extends Controller
         return view('admin.products.edit' , compact('product' ,'brands' , 'tags' , 'productAttributes' , 'productVariations'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+
+        $request->validate([
+            'name' => 'required',
+            'brand_id' => 'required|exists:brands,id',
+            'is_active' => 'required',
+            'tag_ids' => 'required',
+            'tag_ids.*' => 'exists:tags,id',
+            'description' => 'required',
+            'attribute_values' => 'required',
+            'variation_values' => 'required',
+            'variation_values.*.price' => 'required|integer',
+            'variation_values.*.quantity' => 'required|integer',
+            'variation_values.*.salePrice' => 'nullable|integer',
+            'variation_values.*.date_on_sale_from' => 'nullable',
+            // 'variation_values.*.date_on_sale_from' => 'nullable|date',
+            'variation_values.*.date_on_sale_to' => 'nullable',
+            // 'variation_values.*.date_on_sale_to' => 'nullable|date',
+            'delivery_amount' => 'required|integer',
+            'delivery_amount_per_product' => 'nullable|integer',
+        ]);
+        try{
+            DB::beginTransaction();
+            $product->update([
+                'name' => $request->name,
+                'brand_id' => $request->brand_id,
+                'is_active' => $request->is_active,
+                'description' => $request->description,
+                'delivery_amount' => $request->delivery_amount,
+                'delivery_amount_per_product' => $request->delivery_amount_per_product,
+            ]);
+
+            $product->tags()->sync($request->tag_ids);
+
+        $ProductAttributeController = new ProductAttributeController();
+        $ProductAttributeController->update($request->attribute_values);
+
+        $ProductVariationController = new ProductVariationController();
+        $ProductVariationController->update($request->variation_values);
+
+
+        DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            alert()->error('مشکل در ویرایش محصول', $ex->getMessage())->persistent('حله');
+            return redirect()->back();
+        }
+
+        alert()->success('محصول مورد نظر ویرایش شد', 'با تشکر');
+        return redirect()->route('admin.products.index');
     }
 
     public function destroy($id)

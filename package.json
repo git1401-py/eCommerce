@@ -22,7 +22,6 @@
         "bootstrap-select": "^1.13.18",
         "jquery": "^3.6.0",
         "md.bootstrappersiandatetimepicker": "^4.0.0",
-        "popper.js": "^1.16.1",
         "sass": "^1.42.1",
         "sass-loader": "^12.1.0",
         "sweetalert": "^2.1.2"

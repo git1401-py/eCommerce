@@ -1,6 +1,5 @@
 window._ = require('lodash');
 
-require('@popperjs/core');
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -12,7 +11,6 @@ try {
 
     require('bootstrap');
 }catch (e) {}
-require('bootstrap');
 
 window.axios = require('axios');
 

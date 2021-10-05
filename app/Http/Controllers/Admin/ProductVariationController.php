@@ -24,4 +24,18 @@ class ProductVariationController extends Controller
             $product_variation->save();
         }
     }
+    public function update($variationIds){
+        foreach($variationIds as  $key => $value){
+            $productVariation = ProductVariation::findOrFail($key);
+
+            $productVariation->update([
+                'price' => $value['price'],
+                'quantity' => $value['quantity'],
+                'sku' => $value['sku'],
+                'sale_price' => $value['sale_price'],
+                'date_on_sale_from' => convertShamsiToGregoriantDate($value['date_on_sale_from']),
+                'date_on_sale_to' => convertShamsiToGregoriantDate($value['date_on_sale_to']),
+            ]);
+        }
+    }
 }

@@ -176,6 +176,16 @@
                                         <label >وضعیت</label>
                                         <input type="text" class="form-control {{ $product->getRawOriginal('is_active') ? 'text-success' : 'text-danger' }}" value="{{ $product->is_active }}" disabled>
                                     </div>
+                                    <div class="form-group col-md-3 mb-3 small text-muted">
+                                        <label for="tag_ids">تگ</label>
+                                        <div class="form-control div-disabled" style="background-color: #eaecf4">
+
+                                                @foreach ($product->tags as $tag)
+                                                        {{ $tag->name }} {{ $loop->last ? '' : '،' }}
+                                                @endforeach
+
+                                        </div>
+                                    </div>
                                     <div class="form-group col-md-3 mb-3">
                                         <label >تاریخ ایجاد</label>
                                         <input type="text" class="form-control" style="font-size:12px" value="{{ verta($product->created_at)->format('Y/n/j H:i') }}" disabled>
@@ -255,14 +265,18 @@
 
                                                     <div class="form-group col-md-4 mb-3">
                                                         <label class="small">تاریخ شروع حراجی</label>
-                                                        <input type="text" disabled class="form-control"
-                                                        value="{{ $variation->date_on_sale_from == null ? null : verta($variation->date_on_sale_from) }}">
+                                                        <input type="text" disabled
+                                                            class="form-control"
+                                                            style="direction: ltr; font-size:10px"
+                                                            value="{{ $variation->date_on_sale_from == null ? null : verta($variation->date_on_sale_from) }}">
                                                     </div>
 
                                                     <div class="form-group col-md-4 mb-3">
                                                         <label class="small">تاریخ پایان حراجی</label>
-                                                        <input type="text" disabled class="form-control"
-                                                        value="{{ $variation->date_on_sale_to == null ? null : verta($variation->date_on_sale_to) }}">
+                                                        <input type="text" disabled
+                                                            class="form-control"
+                                                            style="direction: ltr; font-size:10px"
+                                                            value="{{ $variation->date_on_sale_to == null ? null : verta($variation->date_on_sale_to) }}">
                                                     </div>
 
 
@@ -306,7 +320,6 @@
 
 
                                     <div class="form-group col-md-6 mb-3">
-                                        <button type="submit" class="btn btn-outline-primary">ثبت</button>
                                     </div>
                                     <div class="form-group col-md-4 mb-3 me-auto">
 

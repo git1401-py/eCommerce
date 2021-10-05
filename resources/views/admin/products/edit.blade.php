@@ -19,22 +19,34 @@
             $(".js-tag").select2({
                 placeholder: "انتخاب تگ"
             });
+            var customOptions = {
+			placeholder: "روز / ماه / سال"
+			, twodigit: false
+			, closeAfterSelect: true
+			, nextButtonIcon: "fa fa-arrow-circle-right"
+			, previousButtonIcon: "fa fa-arrow-circle-left"
+			, buttonsColor: "blue"
+			, forceFarsiDigits: true
+			, markToday: true
+			, markHolidays: true
+			, highlightSelectedDay: true
+			, sync: true
+			, gotoToday: true
+		}
+        let variations = @json($productVariations);
+        variations.forEach(variation => {
+            kamaDatepicker(`date_on_sale_from-${ variation.id }`, customOptions);
+		    kamaDatepicker(`date_on_sale_to-${ variation.id }`, customOptions);
+        });
 
 
 
-            const dtp1Instance = new mds.MdsPersianDateTimePicker(document.getElementById('dtp1'), {
-                targetTextSelector: '[data-name="dtp1-text"]',
-                targetDateSelector: '[data-name="dtp1-date"]',
-            });
-            const date_on_sale_fromInstance = new mds.MdsPersianDateTimePicker(document.getElementById(
-                'dtp2'), {
-                targetTextSelector: '[data-name="dtp2-text"]',
-                targetDateSelector: '[data-name="dtp2-date"]',
-                enableTimePicker: true,
-                textFormat: 'yyyy-MM-dd HH:mm:ss'
-            });
 
-
+            // Bootstrap 5
+	// const dpInstance = new mds.MdsPersianDateTimePicker(document.getElementById('dp-example'), {
+	//   targetTextSelector: '[data-name="dp-example-text"]',
+	//   targetDateSelector: '[data-name="dp-example-date"]',
+	// });
 
         });
 
@@ -58,25 +70,6 @@
                                 @csrf
                                 @method('put')
                                 <div class="row">
-                                    {{-- <div class="col-12" :hidden="inLine == '1' && modalMode == '0'">
-                                        <h3 :hidden="toDateFromDate == '0'">From Date</h3>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text cursor-pointer" style="cursor: pointer;"
-                                                id="dtp1">📅</span>
-                                            <input type="text" class="form-control" placeholder="Date Picker Text"
-                                                data-name="dtp1-text">
-                                            <input type="text" class="form-control" placeholder="Date Picker Date"
-                                                data-name="dtp1-date">
-                                        </div>
-                                        <h3 :hidden="toDateFromDate == '0'">To Date</h3>
-                                        <div class="input-group mb-3" :hidden="toDateFromDate == '0'">
-                                            <span class="input-group-text cursor-pointer" id="dtp2">📅</span>
-                                            <input type="text" class="form-control" placeholder="Date Picker Text"
-                                                data-name="dtp2-text">
-                                            <input type="text" class="form-control" placeholder="Date Picker Date"
-                                                data-name="dtp2-date">
-                                        </div>
-                                    </div> --}}
 
 
                                     <div class="form-group col-md-3 mb-3">
@@ -214,26 +207,33 @@
                                                         </div>
 
                                                         <div class="form-group col-md-4 mb-3">
-                                                            <label class="small">تاریخ شروع حراجی</label>
-                                                            <div class="input-group mb-3">
-                                                                <span class="input-group-text cursor-pointer"
-                                                                    id="dtp1">📅</span>
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="Date Picker Text" data-name="dtp1-text">
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="Date Picker Date" data-name="dtp1-date">
-                                                            </div>
-
-                                                            <input type="text" class="form-control" id="date_on_sale_from"
+                                                            <span class="small">تاریخ شروع حراجی</span>
+                                                            <input type="text" id="date_on_sale_from-{{ $variation->id }}"
+                                                            style="direction: ltr; "
                                                                 name="variation_values[{{ $variation->id }}][date_on_sale_from]"
-                                                                value="{{ $variation->date_on_sale_from == null ? null : verta($variation->date_on_sale_from) }}">
+                                                                {{-- value="{{ $variation->date_on_sale_from == null ? null : verta($variation->date_on_sale_from) }}" --}}
+                                                                >
+
+                                                            {{-- <label class="small">تاریخ شروع حراجی</label>
+                                                            <input type="text" class="form-control" placeholder="1399-11-01 22:11:23" id="date_on_sale_from"
+                                                                style="direction: ltr; font-size:10px"
+                                                                name="variation_values[{{ $variation->id }}][date_on_sale_from]"
+                                                                value="{{ $variation->date_on_sale_from == null ? null : verta($variation->date_on_sale_from) }}"> --}}
                                                         </div>
 
                                                         <div class="form-group col-md-4 mb-3">
-                                                            <label class="small">تاریخ پایان حراجی</label>
-                                                            <input type="text" class="form-control" id="date_on_sale_to"
+                                                            <span class="small">تاریخ پایان حراجی</span>
+                                                            <input type="text" id="date_on_sale_to-{{ $variation->id }}"
+                                                            style="direction: ltr; "
                                                                 name="variation_values[{{ $variation->id }}][date_on_sale_to]"
-                                                                value="{{ $variation->date_on_sale_to == null ? null : verta($variation->date_on_sale_to) }}">
+                                                                {{-- value="{{ $variation->date_on_sale_to == null ? null : verta($variation->date_on_sale_to) }}" --}}
+                                                                >
+
+                                                            {{-- <label class="small">تاریخ پایان حراجی</label>
+                                                            <input type="text" class="form-control" placeholder="1399-11-01 22:11:23" id="date_on_sale_to"
+                                                                style="direction: ltr; font-size:10px"
+                                                                name="variation_values[{{ $variation->id }}][date_on_sale_to]"
+                                                                value="{{ $variation->date_on_sale_to == null ? null : verta($variation->date_on_sale_to) }}"> --}}
                                                         </div>
 
 

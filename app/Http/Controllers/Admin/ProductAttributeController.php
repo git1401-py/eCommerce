@@ -18,4 +18,12 @@ class ProductAttributeController extends Controller
                 $product_attribute->save();
         }
     }
+    public function update($attributesIds){
+        foreach($attributesIds as  $key => $value){
+            $productAttribute = ProductAttribute::findOrFail($key);
+            $productAttribute->update([
+                'value' => $value,
+            ]);
+        }
+    }
 }

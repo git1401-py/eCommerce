@@ -66,11 +66,11 @@
 
                                             <td>
                                                 <div class="dropdown">
-                                                    <button class="btn btn-sm btn-primary dropdown-toggle" type="button"
+                                                    <a class="btn btn-sm btn-primary dropdown-toggle" type="button"
                                                         id="{{ $product->id }}" data-bs-toggle="dropdown"
                                                         aria-expanded="false">
                                                         عملیات
-                                                    </button>
+                                                    </a>
                                                     <ul class="dropdown-menu" aria-labelledby="{{ $product->id }}">
                                                         <li>
                                                             <a class="dropdown-item"

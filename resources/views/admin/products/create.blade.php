@@ -207,15 +207,42 @@
                                     <div class="col-md-12 mb-3">
                                         <hr>
                                         <p>تصاویر محصول : </p>
-                                    </div>
+                                        {{-- <div class="d-flex flex-grow-0 flex-wrap align-items-center">
+                                            <input
+                                              type="file"
+                                              class="custom-file-input bg-danger"
+                                              id="customFile"
+                                              multiple
+                                            />
+                                            <div class="uploading-image">
+                                              <label
+                                                class="custom-file-label d-flex justify-content-center p-3 w-100 h-100"
+                                                for="customFile"
+                                              >
+                                            <img src="{{ asset('../images/admin/imgUpload.png') }}" alt=""></label>
+                                            </div>
+                                    </div> --}}
 
                                     <div class="form-group col-md-3 mb-3">
                                         <label for="primary_image">انتخاب تصویر اصلی</label>
-                                        <div class="custom-file">
+                                        <input
+                                              type="file"
+                                              class="custom-file-input bg-danger"
+                                              name="primary_image" id="primary_image"
+
+                                            />
+                                            <div class="uploading-image">
+                                              <label
+                                                class="custom-file-label d-flex justify-content-center p-3 w-50 h-50"
+                                                for="primary_image"
+                                              >
+                                            <img src="{{ asset('../images/admin/imgUpload.png') }}" alt=""></label>
+                                            </div>
+                                        {{-- <div class="custom-file">
                                             <input type="file" name="primary_image" id="primary_image"
                                                 class="custom-file-input">
                                             <label for="primary_image" class="custom-file-label">انتخاب فایل</label>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="form-group col-md-9 mb-3">
                                         <div class="position-relative" id="imageShow"></div>
@@ -223,11 +250,23 @@
 
                                     <div class="form-group col-md-3 mb-3">
                                         <label for="images">انتخاب تصاویر</label>
-                                        <div class="custom-file">
+                                        <input
+                                              type="file"
+                                              class="custom-file-input bg-danger"
+                                              name="images[]" multiple id="images"
+                                            />
+                                            <div class="uploading-image">
+                                              <label
+                                                class="custom-file-label d-flex justify-content-center p-3 w-50 h-50"
+                                                for="images"
+                                              >
+                                            <img src="{{ asset('../images/admin/imgUpload.png') }}" alt=""></label>
+                                            </div>
+                                        {{-- <div class="custom-file">
                                             <input type="file" name="images[]" multiple id="images"
                                                 class="custom-file-input">
                                             <label for="images" class="custom-file-label">انتخاب فایل ها</label>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="form-group col-md-9 mb-3">
                                         <div class="position-relative d-flex  flex-grow-0 flex-wrap align-items-center" id="imagesShow"></div>
