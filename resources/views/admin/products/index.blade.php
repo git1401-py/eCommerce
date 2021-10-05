@@ -79,7 +79,7 @@
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a class="dropdown-item" href="#">
+                                                            <a class="dropdown-item" href="{{ route('admin.products.images.edit', ['product' => $product->id]) }}"">
                                                                 ویرایش تصاویر
                                                             </a>
                                                         </li>
