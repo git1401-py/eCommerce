@@ -84,9 +84,8 @@
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a class="dropdown-item" href="#">
+                                                            <a class="dropdown-item" href="{{ route('admin.products.category.edit', ['product' => $product->id]) }}"">
                                                                 ویرایش دسته بندی و ویژگی
-
                                                             </a>
                                                         </li>
                                                     </ul>

@@ -21,16 +21,16 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::latest()->paginate(20);
-        return view('admin.products.index' , compact('products'));
+        return view('admin.products.index', compact('products'));
     }
 
     public function create()
     {
         $brands = Brand::all();
         $tags = Tag::all();
-        $categories = Category::where('parent_id' , '!=' , 0)->get();
+        $categories = Category::where('parent_id', '!=', 0)->get();
 
-        return view('admin.products.create' , compact('brands' , 'tags' , 'categories'));
+        return view('admin.products.create', compact('brands', 'tags', 'categories'));
     }
 
     public function store(Request $request)
@@ -55,42 +55,42 @@ class ProductController extends Controller
             'delivery_amount_per_product' => 'nullable|integer',
         ]);
 
-        try{
+        try {
             DB::beginTransaction();
 
-        $ProductImageController = new ProductImageController;
-        $fileNameImages = $ProductImageController->upload($request->primary_image , $request->images);
+            $ProductImageController = new ProductImageController;
+            $fileNameImages = $ProductImageController->upload($request->primary_image, $request->images);
 
-        $product = new Product();
-        $product->name = $request->name;
-        $product->brand_id = $request->brand_id;
-        $product->is_active = $request->is_active;
-        $product->description = $request->description;
-        $product->primary_image = $fileNameImages['fileNamePrimaryImage'];
-        $product->category_id = $request->category_id;
-        $product->delivery_amount = $request->delivery_amount;
-        $product->delivery_amount_per_product = $request->delivery_amount_per_product;
+            $product = new Product();
+            $product->name = $request->name;
+            $product->brand_id = $request->brand_id;
+            $product->is_active = $request->is_active;
+            $product->description = $request->description;
+            $product->primary_image = $fileNameImages['fileNamePrimaryImage'];
+            $product->category_id = $request->category_id;
+            $product->delivery_amount = $request->delivery_amount;
+            $product->delivery_amount_per_product = $request->delivery_amount_per_product;
 
-        $product->save();
+            $product->save();
 
-        foreach($fileNameImages['fileNameImages'] as $fileNameImage){
-            $product_image = new ProductImage();
-            $product_image->product_id = $product->id;
-            $product_image->image = $fileNameImage;
+            foreach ($fileNameImages['fileNameImages'] as $fileNameImage) {
+                $product_image = new ProductImage();
+                $product_image->product_id = $product->id;
+                $product_image->image = $fileNameImage;
 
-            $product_image->save();
-        }
+                $product_image->save();
+            }
 
-        $ProductAttributeController = new ProductAttributeController();
-        $ProductAttributeController->store($request->attribute_ids , $product);
+            $ProductAttributeController = new ProductAttributeController();
+            $ProductAttributeController->store($request->attribute_ids, $product);
 
-        $attributeId = (Category::find($request->category_id))->attributes()->wherePivot('is_variation' , 1)->first()->id;
-        $ProductVariationController = new ProductVariationController();
-        $ProductVariationController->store($request->variation_values , $attributeId , $product);
+            $attributeId = (Category::find($request->category_id))->attributes()->wherePivot('is_variation', 1)->first()->id;
+            $ProductVariationController = new ProductVariationController();
+            $ProductVariationController->store($request->variation_values, $attributeId, $product);
 
-        $product->tags()->attach($request->tag_ids);
+            $product->tags()->attach($request->tag_ids);
 
-        DB::commit();
+            DB::commit();
         } catch (\Exception $ex) {
             DB::rollBack();
             alert()->error('مشکل در ایجاد محصول', $ex->getMessage())->persistent('حله');
@@ -106,7 +106,7 @@ class ProductController extends Controller
         $productAttributes = $product->attributes()->with('attribute')->get();
         $productVariations = $product->variations;
         $images = $product->images;
-        return view('admin.products.show' , compact('product' , 'productAttributes' , 'productVariations' , 'images'));
+        return view('admin.products.show', compact('product', 'productAttributes', 'productVariations', 'images'));
     }
 
     public function edit(Product $product)
@@ -115,7 +115,7 @@ class ProductController extends Controller
         $tags = Tag::all();
         $productAttributes = $product->attributes()->with('attribute')->get();
         $productVariations = $product->variations;
-        return view('admin.products.edit' , compact('product' ,'brands' , 'tags' , 'productAttributes' , 'productVariations'));
+        return view('admin.products.edit', compact('product', 'brands', 'tags', 'productAttributes', 'productVariations'));
     }
 
     public function update(Request $request, Product $product)
@@ -140,7 +140,7 @@ class ProductController extends Controller
             'delivery_amount' => 'required|integer',
             'delivery_amount_per_product' => 'nullable|integer',
         ]);
-        try{
+        try {
             DB::beginTransaction();
             $product->update([
                 'name' => $request->name,
@@ -153,14 +153,14 @@ class ProductController extends Controller
 
             $product->tags()->sync($request->tag_ids);
 
-        $ProductAttributeController = new ProductAttributeController();
-        $ProductAttributeController->update($request->attribute_values);
+            $ProductAttributeController = new ProductAttributeController();
+            $ProductAttributeController->update($request->attribute_values);
 
-        $ProductVariationController = new ProductVariationController();
-        $ProductVariationController->update($request->variation_values);
+            $ProductVariationController = new ProductVariationController();
+            $ProductVariationController->update($request->variation_values);
 
 
-        DB::commit();
+            DB::commit();
         } catch (\Exception $ex) {
             DB::rollBack();
             alert()->error('مشکل در ویرایش محصول', $ex->getMessage())->persistent('حله');
@@ -174,5 +174,47 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function editCategory(Request $request, Product $product)
+    {
+        $categories = Category::where('parent_id', '!=', 0)->get();
+
+        return view('admin.products.edit_category', compact('product', 'categories'));
+    }
+    public function updateCategory(Request $request, Product $product)
+    {
+        $request->validate([
+
+            'category_id' => 'required',
+            'attribute_ids' => 'required',
+            'attribute_ids.*' => 'required',
+            'variation_values' => 'required',
+            'variation_values.*.*' => 'required',
+            'variation_values.price.*' => 'integer',
+            'variation_values.quantity.*' => 'integer',
+
+        ]);
+        try {
+            DB::beginTransaction();
+            $product->update([
+                'category_id' => $request->category_id,
+            ]);
+
+            $ProductAttributeController = new ProductAttributeController();
+            $ProductAttributeController->change($request->attribute_ids, $product);
+
+            $attributeId = (Category::find($request->category_id))->attributes()->wherePivot('is_variation', 1)->first()->id;
+            $ProductVariationController = new ProductVariationController();
+            $ProductVariationController->change($request->variation_values, $attributeId, $product);
+
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            alert()->error('مشکل در ویرایش محصول', $ex->getMessage())->persistent('حله');
+            return redirect()->back();
+        }
+
+        alert()->success('محصول مورد نظر ویرایش شد', 'با تشکر');
+        return redirect()->route('admin.products.index');
     }
 }
