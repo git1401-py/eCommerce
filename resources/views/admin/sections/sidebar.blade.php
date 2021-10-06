@@ -34,7 +34,10 @@
                 </div>
             </div>
         </li>
-
+        <div class=" text-muted small"> <span class="small">تنظیمات</span></div>
+        <li class="nav-item"><a href="{{ route('admin.banners.index') }}"
+                class="nav-link text-white p-3 mb-2 sidebar-link "><i
+                    class="fas fa-store text-light  ml-3"></i>بنرها</a></li>
 
 
         <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link "><i
