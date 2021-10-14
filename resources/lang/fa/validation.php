@@ -244,6 +244,8 @@ return [
 
         'delivery_amount'       => 'هزینه ارسال',
         'delivery_amount_per_product' => 'هزینه ارسال به ازای محصول اضافی',
+        'cellphone'             => 'شماره تلفن همراه',
+        'otp'                   => 'رمز یکبار مصرف',
     ],
 
 ];
