@@ -172,7 +172,7 @@
                         @foreach ($products as $product)
                         <div class="swiper-slide p-0" style="height:93%">
                             <div class="card position-relative m-0" style="width: 100%;height: 100%;">
-                                <a href="#">
+                                <a href="{{ route('home.products.show' , ['product' => $product->slug] ) }}">
                                     <img src="{{ asset(env('PRODUCT_IMAGES_UPLOAD_PATH') . $product->primary_image) }}"
                                         alt="{{ $product->name }}" class="w-100 h-100">
                                 </a>
@@ -292,7 +292,7 @@
                                         @if ($product->quantity_check)
 
                                             @if ($product->sale_check)
-                                                <span class="fw-bolder text-danger fa-4x" >
+                                                <span class="fw-bolder text-danger fa-2x" >
                                                     {{ number_format($product->sale_check->sale_price) }}
                                                     تومان
                                                 </span>
@@ -302,7 +302,7 @@
                                                     تومان
                                                 </del>
                                             @else
-                                                <span class="fw-bolder text-danger fa-4x">
+                                                <span class="fw-bolder text-danger fa-2x">
                                                     {{ number_format($product->price_check->price) }}
                                                     تومان
                                                 </span>
@@ -616,6 +616,8 @@
         //     swiper: galleryThumbs2,
         // },
     });
+
+
     $('.variation-select').on('change' , function(){
             let variation = JSON.parse(this.value);
             let variationPriceDiv = $('.variation-price');
@@ -623,7 +625,7 @@
 
             if(variation.is_sale){
                 let spanSale = $('<span />' , {
-                    class : 'fw-bolder text-danger fa-4x',
+                    class : 'fw-bolder text-danger fa-2x',
                     text : toPersianNum(number_format(variation.sale_price)) + ' تومان'
                 });
                 let spanPrice = $('<del />' , {
@@ -635,7 +637,7 @@
                 variationPriceDiv.append(spanPrice);
             }else{
                 let spanPrice = $('<span />' , {
-                    class : 'fw-bolder text-danger fa-4x',
+                    class : 'fw-bolder text-danger fa-2x',
                     text : toPersianNum(number_format(variation.price)) + ' تومان'
                 });
                 variationPriceDiv.append(spanPrice);

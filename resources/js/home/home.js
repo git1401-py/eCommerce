@@ -1,6 +1,8 @@
 require("../bootstrap");
 // window.$ = window.jQuery = require("jQuery");
 require("bootstrap/dist/js/bootstrap.bundle");
+require("bootstrap/js/dist/dropdown.js");
+require("bootstrap/js/dist/collapse.js");
 require("sweetalert");
 require("./files/rating");
 window.Swiper = require('swiper');

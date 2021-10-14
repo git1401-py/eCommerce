@@ -7,7 +7,10 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Home\CategoryController as HomeCategoryController;
 use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\Home\ProductController as HomeProductController;
+use App\Http\Controllers\Home\ShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,4 +52,6 @@ Route::prefix('admin-panel/management')->name('admin.')->group(function(){
 });
 
 
-Route::get('/', [HomeController::class , 'index']);
+Route::get('/', [HomeController::class , 'index'])->name('home.index');
+Route::get('/categories/{category:slug}', [HomeCategoryController::class , 'show'])->name('home.categories.show');
+Route::get('/products/{product:slug}', [HomeProductController::class , 'show'])->name('home.products.show');

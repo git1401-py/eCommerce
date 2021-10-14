@@ -94,6 +94,12 @@ $grays: (
 $carousel-control-color: $black;
 $carousel-control-icon-width: 1rem;
 
+$accordion-button-icon:         url("data:image/svg+xml,<svg></svg>");
+$accordion-button-active-icon:  url("data:image/svg+xml,<svg></svg>");
+
+$form-select-padding-x:             10px;
+$form-select-bg-position:           left $form-select-padding-x center;
+
 // Responsive Variables
 $xx-layout: "only screen and (min-width: 1366px) and (max-width: 1600px)";
 $xl-layout: "only screen and (min-width: 1200px) and (max-width: 1365px)";
@@ -101,3 +107,5 @@ $lg-layout: "only screen and (min-width: 992px) and (max-width: 1199px)";
 $md-layout: "only screen and (min-width: 768px) and (max-width: 991px)";
 $xs-layout: "only screen and (max-width: 767px)";
 $sm-layout: "only screen and (min-width: 576px) and (max-width: 767px)";
+
+
