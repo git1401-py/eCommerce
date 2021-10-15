@@ -23,8 +23,8 @@
                 <div class="card card-body">
                     <a class="nav-link text-dark p-3 sidebar-link collapse-item"
                         href="{{ route('admin.products.index') }}">لیست محصولات</a>
-                    {{-- <a class="nav-link text-dark p-3 sidebar-link collapse-item"
-                    href="{{ route('admin.comments.index') }}">لیست کامنت ها</a> --}}
+                    <a class="nav-link text-dark p-3 sidebar-link collapse-item"
+                    href="{{ route('admin.comments.index') }}">لیست کامنت ها</a>
                     <a class="nav-link text-dark p-3 sidebar-link collapse-item"
                         href="{{ route('admin.categories.index') }}">دسته بندی ها</a>
                     <a class="nav-link text-dark p-3 sidebar-link collapse-item"
@@ -37,7 +37,7 @@
         <div class=" text-muted small"> <span class="small">تنظیمات</span></div>
         <li class="nav-item"><a href="{{ route('admin.banners.index') }}"
                 class="nav-link text-white p-3 mb-2 sidebar-link "><i
-                    class="fas fa-store text-light  ml-3"></i>بنرها</a></li>
+                    class="fas fa-image text-light  ml-3"></i>بنرها</a></li>
 
 
         <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link "><i

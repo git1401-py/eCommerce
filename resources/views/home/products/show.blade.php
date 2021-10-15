@@ -52,8 +52,8 @@
                         @endif
 
                     </div>
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div class="my-2 small">
+                    <div class="d-flex align-items-center">
+                        <div class="m-2 small">
                             <div
                                 data-rating-stars="5"
                                 data-rating-readonly="true"
@@ -61,7 +61,8 @@
                                 >
                             </div>
                         </div>
-                        <span class="small border-end">___<a href="#">{{ $product->category->name }}</a></span>
+                        <span class="pe-2 small border-end"><a href="#"> ({{ $product->approvedComments()->count() }}) دیدگاه</a></span>
+                        {{-- <span class="small border-end">___<a href="#">{{ $product->category->name }}</a></span> --}}
                     </div>
                     <p class="">
                         {{ $product->description }}
@@ -190,13 +191,13 @@
             <div class="col-md-7 col-sm-12">
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">توضیحات</button>
+                      <button class="nav-link {{ count($errors) > 0 ? '' : 'active' }}" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">توضیحات</button>
                       <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">اطلاعات بیشتر</button>
-                      <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"> دیدگاه (2) </button>
+                      <button class="nav-link {{ count($errors) > 0 ? 'active' : '' }}" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"> دیدگاه ({{ $product->approvedComments()->count() }}) </button>
                     </div>
                   </nav>
-                  <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade p-3 show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                  <div class="tab-content w-100" id="nav-tabContent">
+                    <div class="tab-pane fade p-3 {{ count($errors) > 0 ? '' : 'show active' }}" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <p class="">
                             {{ $product->description }}
                         </p>
@@ -213,7 +214,64 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="tab-pane fade p-3" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">contact</div>
+                    <div class="tab-pane fade p-3 {{ count($errors) > 0 ? 'show active' : '' }}" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        @foreach ($product->approvedComments as $comment)
+                        <div class="row my-3 border p-3">
+                            <div class="col-3 pe-2">
+                                <img class="rounded-circle" style="width: 75px; height:75px" src="{{ $comment->user->avatar == null ? asset('/images/home/user.png') : $comment->user->avatar}}" alt="">
+                            </div>
+                            <div class="col-9">
+                                <div class="row">
+                                    {{ $comment->text }}
+                                </div>
+                                <div class="row justify-content-between align-items-center small text-gray-500 pt-4">
+                                    <div class="small">
+                                        <div
+                                            data-rating-stars="5"
+                                            data-rating-readonly="true"
+                                            data-rating-value="{{ ceil($comment->user->rates->where('product_id' , $product->id)->avg('rate')) }}"
+                                            >
+                                        </div>
+                                    </div>
+                                    <span>{{ $comment->user->name == null ? 'کاربر گرامی' : $comment->user->name }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        @endforeach
+                        <div class="row">
+                            <form action="{{ route('home.comments.store' , ['product' => $product->id]) }}" method="POST">
+                                @csrf
+                                <span>نوشتن دیدگاه</span>
+
+                                <div class="my-3"
+                                    data-rating-stars="5"
+                                    data-rating-value="0"
+                                    data-rating-input="#rateInput"
+                                    >
+                                </div>
+                                <div class="row">
+                                    <div id="comments" class="col-md-12">
+
+                                        <div class="">
+                                            <label for="commentArea">
+                                                متن دیدگاه
+                                            </label>
+                                            <textarea class="w-100" name="text" id="commentArea" rows="10"></textarea>
+                                        </div>
+                                        <input id="rateInput" type="hidden" name="rate" value="0">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button class="btn btn-danger btn-sm my-3 px-3">ارسال</button>
+                                    </div>
+                                    @include('home.sections.errors')
+                                </div>
+                            </form>
+                        </div>
+
+
+
+                    </div>
                   </div>
 
             </div>

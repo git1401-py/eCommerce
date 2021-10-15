@@ -36,6 +36,9 @@ class AuthController extends Controller
                 $user->otp = $OTPCode;
                 $user->login_token = $loginToken;
                 $user->cellphone = $request->cellphone;
+
+                $user->save();
+
             }
             $user->notify(new OTPSms($OTPCode));
 

@@ -315,7 +315,7 @@
                                         @endif
 
                                     </div>
-                                    <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center">
                                         <div class="my-2 small">
                                             <div
                                                 data-rating-stars="5"
@@ -324,7 +324,8 @@
                                                 >
                                             </div>
                                         </div>
-                                        <span class="small border-end">___<a href="#">{{ $product->category->name }}</a></span>
+                                        <span class="pe-2 small border-end"><a href="#"> ({{ $product->approvedComments()->count() }}) دیدگاه</a></span>
+                                        {{-- <span class="small border-end">___<a href="#">{{ $product->category->name }}</a></span> --}}
                                     </div>
                                     <p class="">
                                         {{ $product->description }}
