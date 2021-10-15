@@ -21,6 +21,7 @@
                                             <a href="{{ route('login') }}"> ایجاد حساب </a>
                                         </li>
                                     @endauth
+                                    <li class="my-3"><a href="{{ route('home.compare.index') }}"> مقایسه محصولات انتخابی </a></li>
                                 </ul>
                             </div>
                         </div>
@@ -329,6 +330,7 @@
                             <a href="{{ route('login') }}"> ایجاد حساب </a>
                         </li>
                     @endauth
+                    <li class="my-3"><a href="{{ route('home.compare.index') }}"> مقایسه محصولات انتخابی </a></li>
 
                 </ul>
             </div>

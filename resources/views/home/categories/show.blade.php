@@ -168,9 +168,12 @@
                                                                         @endauth
                                                                     </li>
                                                                     <li>
-                                                                        <a href="#"><i class="sli sli-refresh"></i><span class="span-refresh">
+                                                                        <a href="{{ route('home.compare.add' , ['product' => $product]) }}">
+                                                                            <i class="sli sli-refresh"></i>
+                                                                            <span class="span-refresh">
                                                                                 مقایسه
-                                                                            </span></a>
+                                                                            </span>
+                                                                        </a>
                                                                     </li>
                                                                     {{-- <li>
                                                                         <a href="#"><i class="sli sli-bag"></i><span class="span-bag"> افزودن به سبد
@@ -365,7 +368,9 @@
                                                                         @endauth
                                                                     </div>
                                                                     <div class="p-2">
-                                                                        <a title="Add To Compare" href="#"><i class="sli sli-refresh"></i></a>
+                                                                        <a title="Add To Compare" href="{{ route('home.compare.add' , ['product' => $product]) }}">
+                                                                            <i class="sli sli-refresh"></i>
+                                                                        </a>
                                                                     </div>
                                                                 </div>
                                                             @endif
@@ -373,7 +378,7 @@
                                                                 <span>دسته بندی :</span>
                                                                 <ul class="list-group list-group-horizontal justify-content-en">
                                                                     <li class="list-group-item p-0 border-0">
-                                                                        <a href="#">
+                                                                        <a href="{{ route('home.categories.show' , ['category' => $product->category->slug ]) }}">
                                                                             {{ $product->category->parent->name }} ، {{ $product->category->name }}
                                                                         </a>
                                                                     </li>
