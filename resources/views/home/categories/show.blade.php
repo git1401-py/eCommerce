@@ -61,180 +61,44 @@
         </div>
 
         <div class="row">
-            <!-- sidebar -->
-
             <div class="col-md-4 col-lg-3">
-                {{-- <form id="filter-form" >
-                    <div class="mobile-search">
-                        <form class="search-form" >
-                            <input type="text" placeholder=" ... جستجو " />
-                            <button class="button-search">
-                                <i class="sli sli-magnifier"></i>
-                            </button>
-                        </form>
-                    </div>
+                <div class="pt-3 pb-2">
+                    <div class="container">
+                        <div class=" me-2">
 
-                    <div class="accordion" id="accordionFiltering">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <span class="ps-4">دسته بندی</span>
-                                </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionFiltering">
-                                <div class="accordion-body">
+
+                            <div class="">
+                                <h5 class=""> دسته بندی </h5>
+                                <div class=" mt-3">
                                     <ul>
-                                        @if ($category->parent == null)
-
-                                            <li >
-                                                <span style="color:#ff3535">{{ $category->name }}</span>
-                                                <ul>
-                                                    @foreach ($category->children as $childCategory)
-                                                        <li class="py-1">
-                                                            <a href="{{ route('home.categories.show' , ['category' => $childCategory->slug]) }}">
-                                                                {{ $childCategory->name }}
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-
-                                        @else
-                                            <li>
-                                                {{ $category->parent->name }}
-                                                <ul>
-                                                    @foreach ($category->parent->children as $childCategory)
-                                                        <li class="py-1">
-                                                            <a href="{{ route('home.categories.show' , ['category' => $childCategory->slug]) }}"
-                                                                style="{{ $childCategory->slug == $category->slug ? 'color:#ff3535' : '' }}">
-                                                                {{ $childCategory->name }}
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                        @endif
-
-
+                                        {{ $category->parent->name }}
+                                        @foreach ($category->parent->children as $childCategory)
+                                        <li>
+                                            <a href="{{ route('home.categories.show' , ['category' => $childCategory->slug ]) }}"
+                                                style="{{ $childCategory->slug == $category->slug ? 'color: #ff3535' : '' }}"
+                                                >
+                                                {{ $childCategory->name }}
+                                            </a>
+                                        </li>
+                                        @endforeach
 
                                     </ul>
-
-
                                 </div>
                             </div>
-                        </div>
+                            <hr>
 
-                        @foreach ($attributes as $attribute)
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="heading-{{ $attribute->id }}">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $attribute->id }}" aria-expanded="false" aria-controls="collapse-{{ $attribute->id }}">
-                                    <span class="ps-4">{{ $attribute->name }}</span>
-                                </button>
-                                </h2>
-                                <div id="collapse-{{ $attribute->id }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ $attribute->id }}" data-bs-parent="#accordionFiltering">
-                                <div class="accordion-body">
-                                    @foreach ($attribute->values as $value)
-                                        <div class="form-check pb-2">
-                                            <input class="form-check-input" type="checkbox"
-                                                name="attribute[{{ $attribute->id }}]" value="{{ $value->value }}"
-                                                id="flexCheck-{{ $value->value }}" onchange="filter()">
-                                            <label class="form-check-label" for="flexCheck-{{ $value->value }}">
-                                                {{ $value->value }}
-                                            </label>
-                                        </div>
-                                    @endforeach
-
-                                </div>
-                                </div>
-                            </div>
-                        @endforeach
-
-                        <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading-{{ $variation->id }}">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $variation->id }}" aria-expanded="false" aria-controls="collapse-{{ $variation->id }}">
-                                <span class="ps-4">{{ $variation->name }}</span>
-                            </button>
-                        </h2>
-                        <div id="collapse-{{ $variation->id }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ $variation->id }}" data-bs-parent="#accordionFiltering">
-                            <div class="accordion-body">
-                                @foreach ($variation->variationValues as $value)
-                                        <div class="form-check pb-2">
-                                            <input class="form-check-input variation" type="checkbox"
-                                                value="{{ $value->value }}" id="flexCheck{{ $value->value }}"
-                                                onchange="filter()"
-                                                {{ (request()->has('variation') && in_array( $value->value , explode('-' , request('variation')) ) ) ? 'checked' : '' }}
-                                            >
-                                            <label class="form-check-label" for="flexCheck{{ $value->value }}">
-                                                {{ $value->value }}
-                                            </label>
-                                        </div>
-                                    @endforeach
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-
-                    <input id="filter-variation" type="hidden" name="variation">
-                </form> --}}
-                    <div class="pt-3 pb-2">
-                        <div class="container">
-
-                            <div class=" me-2">
-
-
-                                <div class="">
-                                    <h5 class=""> دسته بندی </h5>
-                                    <div class=" mt-3">
-                                        <ul>
-                                            {{ $category->parent->name }}
-                                            @foreach ($category->parent->children as $childCategory)
-                                            <li>
-                                                <a href="{{ route('home.categories.show' , ['category' => $childCategory->slug ]) }}"
-                                                    style="{{ $childCategory->slug == $category->slug ? 'color: #ff3535' : '' }}"
-                                                    >
-                                                    {{ $childCategory->name }}
-                                                </a>
-                                            </li>
-                                            @endforeach
-
-                                        </ul>
-                                    </div>
-                                </div>
-                                <hr>
-
-                                @foreach ($attributes as $attribute)
-                                    <div class="mt-3">
-                                        <h5 class=""> {{ $attribute->name }} </h5>
-                                        <div class="mt-2">
-                                            <ul>
-                                                @foreach ($attribute->values as $value)
-                                                    <li>
-                                                        <div class="">
-                                                            <input type="checkbox" class="attribute-{{$attribute->id}}"
-                                                                {{ ( request()->has('attribute.'.$attribute->id) && in_array( $value->value , explode('-' , request()->attribute[$attribute->id] ) ) ) ? 'checked' : '' }}
-                                                                value="{{ $value->value }}" onchange="filter()" >
-                                                            <a href="#"> {{ $value->value }} </a>
-                                                            <span class="checkmark"></span>
-                                                        </div>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                @endforeach
-
+                            @foreach ($attributes as $attribute)
                                 <div class="mt-3">
-                                    <h5 class="">{{ $variation->name }} </h5>
+                                    <h5 class=""> {{ $attribute->name }} </h5>
                                     <div class="mt-2">
                                         <ul>
-                                            @foreach ($variation->variationValues as $value)
+                                            @foreach ($attribute->values as $value)
                                                 <li>
-                                                    <div class="sidebar-widget-list-left">
-                                                        <input type="checkbox" class="variation" value="{{ $value->value }}"
-                                                        onchange="filter()"
-                                                        {{ ( request()->has('variation') && in_array( $value->value , explode('-' , request('variation') ) ) ) ? 'checked' : '' }}
-                                                        > <a href="#"> {{ $value->value }} </a>
+                                                    <div class="">
+                                                        <input type="checkbox" class="attribute-{{$attribute->id}}"
+                                                            {{ ( request()->has('attribute.'.$attribute->id) && in_array( $value->value , explode('-' , request()->attribute[$attribute->id] ) ) ) ? 'checked' : '' }}
+                                                            value="{{ $value->value }}" onchange="filter()" >
+                                                        <a href="#"> {{ $value->value }} </a>
                                                         <span class="checkmark"></span>
                                                     </div>
                                                 </li>
@@ -242,20 +106,35 @@
                                         </ul>
                                     </div>
                                 </div>
+                                <hr>
+                            @endforeach
 
+                            <div class="mt-3">
+                                <h5 class="">{{ $variation->name }} </h5>
+                                <div class="mt-2">
+                                    <ul>
+                                        @foreach ($variation->variationValues as $value)
+                                            <li>
+                                                <div class="sidebar-widget-list-left">
+                                                    <input type="checkbox" class="variation" value="{{ $value->value }}"
+                                                    onchange="filter()"
+                                                    {{ ( request()->has('variation') && in_array( $value->value , explode('-' , request('variation') ) ) ) ? 'checked' : '' }}
+                                                    > <a href="#"> {{ $value->value }} </a>
+                                                    <span class="checkmark"></span>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                             </div>
-
 
                         </div>
                     </div>
-
+                </div>
             </div>
-
-
             <div class="col-md-8 col-lg-9">
                 <div class="container-fluid">
                     <div class="row">
-
                         <div class="product-area mt-5 pt-5">
                             <div class="container-fluid">
                                 <div class="container-tab row mt-3">
@@ -278,9 +157,15 @@
                                                                         </a>
                                                                     </li>
                                                                     <li>
-                                                                        <a href="#"><i class="sli sli-heart"></i><span class=" span-heart"> افزودن
-                                                                                به
-                                                                                علاقه مندی ها </span></a>
+                                                                        @auth
+                                                                            @if ($product->checkUserWishList(auth()->id()))
+                                                                                <a title="Remove From Wishlist" href="{{ route('home.wishlist.remove' , ['product' => $product->id]) }}"><i class="fas fa-heart" style="color:#ff3535"></i><span class=" span-heart"> موجود در لیست علاقه مندی ها </span></a>
+                                                                            @else
+                                                                                <a title="Add To Wishlist" href="{{ route('home.wishlist.add' , ['product' => $product->id]) }}"><i class="fas fa-heart"></i><span class=" span-heart"> افزودن به علاقه مندی ها </span></a>
+                                                                            @endif
+                                                                        @else
+                                                                            <a title="Add To Wishlist" href="{{ route('home.wishlist.add' , ['product' => $product->id]) }}"><i class="fas fa-heart"></i><span class=" span-heart"> افزودن به علاقه مندی ها </span></a>
+                                                                        @endauth
                                                                     </li>
                                                                     <li>
                                                                         <a href="#"><i class="sli sli-refresh"></i><span class="span-refresh">
@@ -469,7 +354,15 @@
                                                                         <a href="#">افزودن به سبد خرید</a>
                                                                     </div>
                                                                     <div class="p-2">
-                                                                        <a title="Add To Wishlist" href="#"><i class="sli sli-heart"></i></a>
+                                                                        @auth
+                                                                            @if ($product->checkUserWishList(auth()->id()))
+                                                                                <a title="Remove From Wishlist" href="{{ route('home.wishlist.remove' , ['product' => $product->id]) }}"><i class="fas fa-heart" style="color:#ff3535"></i></a>
+                                                                            @else
+                                                                                <a title="Add To Wishlist" href="{{ route('home.wishlist.add' , ['product' => $product->id]) }}"><i class="sli sli-heart"></i></a>
+                                                                            @endif
+                                                                        @else
+                                                                            <a title="Add To Wishlist" href="{{ route('home.wishlist.add' , ['product' => $product->id]) }}"><i class="sli sli-heart"></i></a>
+                                                                        @endauth
                                                                     </div>
                                                                     <div class="p-2">
                                                                         <a title="Add To Compare" href="#"><i class="sli sli-refresh"></i></a>

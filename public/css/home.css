@@ -2100,7 +2100,7 @@
   -webkit-animation-fill-mode: backwards;
           animation-fill-mode: backwards;
 }
-.product-area .tab-content .card:hover li .sli-heart {
+.product-area .tab-content .card:hover li .fa-heart {
   position: absolute;
   top: 30px;
   right: 0px;
