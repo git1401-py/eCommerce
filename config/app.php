@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Hekmatinasser\Verta\Laravel\VertaServiceProvider::class,
         Anetwork\Validation\PersianValidationServiceProvider::class,
+        Darryldecode\Cart\CartServiceProvider::class,
 
 
         /*
@@ -232,6 +233,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Verta' => Hekmatinasser\Verta\Verta::class,
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
 
     ],
 

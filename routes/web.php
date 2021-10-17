@@ -5,10 +5,12 @@ use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Home\CartController;
 use App\Http\Controllers\Home\CategoryController as HomeCategoryController;
 use App\Http\Controllers\Home\CommentController as HomeCommentController;
 use App\Http\Controllers\Home\CompareController;
@@ -45,6 +47,7 @@ Route::prefix('admin-panel/management')->name('admin.')->group(function(){
     Route::resource('products', ProductController::class);
     Route::resource('banners', BannerController::class);
     Route::resource('comments', CommentController::class);
+    Route::resource('coupons', CouponController::class);
 
     // Get Comments
     Route::get('/comments/{comment}/change-approve' , [CommentController::class , 'changeApprove'])->name('comments.change-approve');
@@ -85,6 +88,13 @@ Route::get('/compare', [CompareController::class , 'index'])->name('home.compare
 Route::get('/add-to-compare/{product}', [CompareController::class , 'add'])->name('home.compare.add');
 Route::get('remove-from-compare/{product}', [CompareController::class , 'remove'])->name('home.compare.remove');
 
+Route::get('/cart', [CartController::class , 'index'])->name('home.cart.index');
+Route::post('/add-to-cart', [CartController::class , 'add'])->name('home.cart.add');
+Route::get('/remove-from-cart/{rowId}', [CartController::class , 'remove'])->name('home.cart.remove');
+Route::get('/clear-cart', [CartController::class , 'clear'])->name('home.cart.clear');
+Route::put('/cart', [CartController::class , 'update'])->name('home.cart.update');
+Route::post('/check-coupon', [CartController::class , 'checkCoupon'])->name('home.coupons.check');
+
 
 Route::any('/login', [AuthController::class , 'login'])->name('login');
 Route::post('/check-otp', [AuthController::class , 'checkOtp']);
@@ -93,5 +103,6 @@ Route::post('/resend-otp', [AuthController::class , 'resendOtp']);
 
 
 Route::get('/test' , function () {
-    dd(session()->get('compareProducts'));
+    // \Cart::clear();
+    dd(\Cart::getContent());
 });

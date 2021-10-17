@@ -205,8 +205,11 @@
                                                     </span></a>
                                             </li>
                                             {{-- <li>
-                                                <a href="#"><i class="sli sli-bag"></i><span class="span-bag"> افزودن به سبد
-                                                        خرید </span></a>
+                                                <a href="{{ route('home.cart.add') }}">
+                                                    <i class="sli sli-bag"></i>
+                                                    <span class="span-bag"> افزودن به سبد خرید
+                                                    </span>
+                                                </a>
                                             </li> --}}
                                         </ul>
                                     </div>
@@ -349,62 +352,69 @@
                                         </ul>
                                     </div>
                                     <hr>
-                                    @if ($product->quantity_check)
-                                        @php
-                                            if($product->sale_check)
-                                            {
-                                                $variationProductSelected = $product->sale_check;
-                                            }else{
-                                                $variationProductSelected = $product->price_check;
-                                            }
-                                        @endphp
-                                        <div class="">
+                                    <form action="{{ route('home.cart.add') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+                                        @if ($product->quantity_check)
+                                            @php
+                                                if($product->sale_check)
+                                                {
+                                                    $variationProductSelected = $product->sale_check;
+                                                }else{
+                                                    $variationProductSelected = $product->price_check;
+                                                }
+                                            @endphp
                                             <div class="">
+                                                <div class="">
 
-                                                <span> {{ App\Models\Attribute::find($product->variations()->first()->attribute_id)->name }}</span>
-                                                <div class="my-2 w-50">
+                                                    <span> {{ App\Models\Attribute::find($product->variations()->first()->attribute_id)->name }}</span>
+                                                    <div class="my-2 w-50">
 
-                                                    <span>{{ App\Models\Attribute::find($product->variations->first()->attribute_id)->name }}</span>
-                                                    <select class="form-control variation-select">
-                                                        @foreach ($product->variations()->where('quantity' , '>' , 0)->get() as $variation)
-                                                            <option
-                                                            value="{{ json_encode($variation->only(['id' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
-                                                            {{ $variationProductSelected->id == $variation->id ? 'selected' : '' }}
-                                                            >{{ $variation->value }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                        <span>{{ App\Models\Attribute::find($product->variations->first()->attribute_id)->name }}</span>
+                                                        <select name="variation" class="form-control variation-select">
+                                                            @foreach ($product->variations()->where('quantity' , '>' , 0)->get() as $variation)
+                                                                <option
+                                                                value="{{ json_encode($variation->only(['id' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
+                                                                {{ $variationProductSelected->id == $variation->id ? 'selected' : '' }}
+                                                                >{{ $variation->value }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-end">
-                                            <div class="text-muted d-flex align-items-center justify-content-center"
-                                                style="width: 50px; height: 60px;">
-                                                <span class="p-2 plus" style="cursor: pointer">+</span>
-                                                <input class="text-center box quantity-input" type="text" name="qtybutton"
-                                                    style="width: 50px; height: 60px;" value="2"  data-max="5"/>
-                                                <span class="p-2 mines" style="cursor: pointer">-</span>
                                             </div>
-                                            <div class="me-4">
-                                                <a href="#">افزودن به سبد خرید</a>
-                                            </div>
-                                            <div class="p-2">
-                                                @auth
-                                                    @if ($product->checkUserWishList(auth()->id()))
-                                                        <a title="Remove From Wishlist" href="{{ route('home.wishlist.remove' , ['product' => $product->id]) }}"><i class="fas fa-heart" style="color:#ff3535"></i></a>
+                                            <div class="d-flex align-items-center justify-content-end">
+                                                <div class="text-muted d-flex align-items-center justify-content-center"
+                                                    style="width: 50px; height: 60px;">
+                                                    <span class="p-2 plus" style="cursor: pointer">+</span>
+                                                    <input class="text-center box quantity-input" type="text" name="qtybutton"
+                                                        style="width: 50px; height: 60px;" value="2"  data-max="5"/>
+                                                    <span class="p-2 mines" style="cursor: pointer">-</span>
+                                                </div>
+                                                <div class="me-4">
+                                                    <button tupe="submit" class=" btn btn-outline-dark">
+                                                        <i class="sli sli-bag"></i> افزودن به سبد خرید
+                                                    </button>
+                                                </div>
+                                                <div class="p-2">
+                                                    @auth
+                                                        @if ($product->checkUserWishList(auth()->id()))
+                                                            <a title="Remove From Wishlist" href="{{ route('home.wishlist.remove' , ['product' => $product->id]) }}"><i class="fas fa-heart" style="color:#ff3535"></i></a>
+                                                        @else
+                                                            <a title="Add To Wishlist" href="{{ route('home.wishlist.add' , ['product' => $product->id]) }}"><i class="sli sli-heart"></i></a>
+                                                        @endif
                                                     @else
                                                         <a title="Add To Wishlist" href="{{ route('home.wishlist.add' , ['product' => $product->id]) }}"><i class="sli sli-heart"></i></a>
-                                                    @endif
-                                                @else
-                                                    <a title="Add To Wishlist" href="{{ route('home.wishlist.add' , ['product' => $product->id]) }}"><i class="sli sli-heart"></i></a>
-                                                @endauth
+                                                    @endauth
+                                                </div>
+                                                <div class="p-2">
+                                                    <a title="Add To Compare" href="{{ route('home.compare.add' , ['product' => $product]) }}">
+                                                        <i class="sli sli-refresh"></i></a>
+                                                </div>
                                             </div>
-                                            <div class="p-2">
-                                                <a title="Add To Compare" href="{{ route('home.compare.add' , ['product' => $product]) }}">
-                                                    <i class="sli sli-refresh"></i></a>
-                                            </div>
-                                        </div>
-                                    @endif
+                                        @endif
+                                    </form>
                                     <div class="mt-3">
                                         <span>دسته بندی :</span>
                                         <ul class="list-group list-group-horizontal justify-content-en">
