@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Home\AddressController;
 use App\Http\Controllers\Home\CartController;
 use App\Http\Controllers\Home\CategoryController as HomeCategoryController;
 use App\Http\Controllers\Home\CommentController as HomeCommentController;
@@ -71,10 +72,17 @@ Route::prefix('admin-panel/management')->name('admin.')->group(function(){
 
 Route::prefix('profile')->name('home.')->group(function(){
     Route::get('/', [ProfileController::class , 'index'])->name('users_profile.index');
+
     Route::get('/comments', [HomeCommentController::class , 'usersProfileIndex'])->name('comments.users_profile.index');
+
     Route::get('/wishlist', [WishlistController::class , 'usersProfileIndex'])->name('wishlist.users_profile.index');
 
+    Route::get('/addresses', [AddressController::class , 'index'])->name('addresses.index');
+    Route::post('/addresses', [AddressController::class , 'store'])->name('addresses.store');
+    Route::put('/addresses/{address}', [AddressController::class , 'update'])->name('addresses.update');
+
 });
+Route::get('/get-province-cities-list', [AddressController::class , 'getProvinceCitiesLis']);
 
 Route::get('/', [HomeController::class , 'index'])->name('home.index');
 Route::get('/categories/{category:slug}', [HomeCategoryController::class , 'show'])->name('home.categories.show');
@@ -94,12 +102,12 @@ Route::get('/remove-from-cart/{rowId}', [CartController::class , 'remove'])->nam
 Route::get('/clear-cart', [CartController::class , 'clear'])->name('home.cart.clear');
 Route::put('/cart', [CartController::class , 'update'])->name('home.cart.update');
 Route::post('/check-coupon', [CartController::class , 'checkCoupon'])->name('home.coupons.check');
+Route::get('/checkout', [CartController::class , 'checkout'])->name('home.orders.checkout');
 
 
 Route::any('/login', [AuthController::class , 'login'])->name('login');
 Route::post('/check-otp', [AuthController::class , 'checkOtp']);
 Route::post('/resend-otp', [AuthController::class , 'resendOtp']);
-
 
 
 Route::get('/test' , function () {

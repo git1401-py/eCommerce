@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\City;
 use App\Models\Coupon;
 use App\Models\Order;
+use App\Models\Province;
 use Carbon\Carbon;
 
 function generateFileName($name)
@@ -94,4 +96,15 @@ function cartTotalAmount()
     }else{
         return \Cart::getTotal() + cartTotalDeliverityAmount();
     }
+}
+
+
+function province_name($provinceId)
+{
+    return Province::findOrFail($provinceId)->name;
+}
+
+function city_name($cityId)
+{
+    return City::findOrFail($cityId)->name;
 }

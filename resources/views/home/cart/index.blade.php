@@ -167,7 +167,7 @@
                         <span>{{ number_format( cartTotalAmount() ) }} تومان</span>
                     </div>
                     <div class="row">
-                        <a href="#" class="btn btn-block btn-outline-dark">ادامه فرآیند خرید</a>
+                        <a href="{{ route('home.orders.checkout') }}" class="btn btn-block btn-outline-dark">ادامه فرآیند خرید</a>
                     </div>
                 </div>
             </div>

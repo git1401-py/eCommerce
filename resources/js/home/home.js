@@ -315,3 +315,69 @@ $activingTab.on("click", function (e) {
 //     scrollSpeed: 900,
 //     animation: "fade",
 // });
+/*-------------------------
+    Create an address toggle
+    --------------------------*/
+    $('.collapse-address-create').on('click', function (e) {
+        e.preventDefault();
+        $('.collapse-address-create-content').slideToggle(1000);
+    });
+
+    /*-------------------------
+    Update an address toggle
+    --------------------------*/
+    $('.collapse-address-update').on('click', function (e) {
+        e.preventDefault();
+        $('.collapse-address-update-content').slideToggle(1000);
+    });
+    /*--- checkout toggle function ----*/
+    $('.checkout-click1').on('click', function (e) {
+        e.preventDefault();
+        $('.checkout-login-info').slideToggle(900);
+    });
+
+
+    /*--- checkout toggle function ----*/
+    $('.checkout-click3').on('click', function (e) {
+        e.preventDefault();
+        $('.checkout-login-info3').slideToggle(1000);
+    });
+
+    /*-------------------------
+    Create an account toggle
+    --------------------------*/
+    $('.checkout-toggle2').on('click', function () {
+        $('.open-toggle2').slideToggle(1000);
+    });
+
+    $('.checkout-toggle').on('click', function () {
+        $('.open-toggle').slideToggle(1000);
+    });
+
+    /*-------------------------
+    Create an address toggle
+    --------------------------*/
+    // $('.collapse-address-create').on('click', function (e) {
+    //     e.preventDefault();
+    //     $('.collapse-address-create-content').slideToggle(1000);
+    // });
+
+    // /*-------------------------
+    // Update an address toggle
+    // --------------------------*/
+    // $('.collapse-address-update').on('click', function (e) {
+    //     e.preventDefault();
+    //     $('.collapse-address-update-content').slideToggle(1000);
+    // });
+
+    /*----------------------------------
+    checkout one click toggle function
+    ------------------------------------*/
+    var checked = $('.sin-payment input:checked')
+    if (checked) {
+        $(checked).siblings('.payment-box').slideDown(900);
+    };
+    $('.sin-payment input').on('change', function () {
+        $('.payment-box').slideUp(900);
+        $(this).siblings('.payment-box').slideToggle(900);
+    });
