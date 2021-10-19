@@ -6,12 +6,12 @@
             پروفایل
         </a>
 
-        <a href="#orders">
+        <a href="{{ route('home.orders.users_profile.index') }}" class="{{ request()->is('profile/orders') ? 'active' : '' }}">
             <i class="sli sli-basket ml-1"></i>
             سفارشات
         </a>
 
-        <a href="{{ route('home.addresses.index') }}"  class="{{ request()->is('profile/addresses') ? 'active' : '' }}">
+        <a href="{{ route('home.addresses.index') }}" class="{{ request()->is('profile/addresses') ? 'active' : '' }}">
             <i class="sli sli-map ml-1"></i>
             آدرس ها
         </a>

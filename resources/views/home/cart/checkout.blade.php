@@ -42,7 +42,7 @@
                                         <label> انتخاب آدرس تحویل سفارش <abbr class="required"
                                                 title="required">*</abbr></label>
 
-                                        <select class="email s-email s-wid">
+                                        <select class="email s-email s-wid" id="address-select">
                                             @foreach ($addresses as $address)
                                                 <option value="{{ $address->id }}">{{ $address->title }}</option>
 
@@ -156,130 +156,134 @@
                     </div>
 
                     <div class="col-lg-5">
-                        <div class="your-order-area">
-                            <h3> سفارش شما </h3>
-                            <div class="your-order-wrap gray-bg-4">
-                                <div class="your-order-info-wrap">
-                                    <div class="your-order-info">
-                                        <ul>
-                                            <li> محصول <span> جمع </span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="your-order-middle">
-                                        <ul>
-                                            @foreach (\Cart::getContent() as $item)
-                                                <li class="d-flex align-items-center justify-content-between">
-                                                    <div class="">
-                                                        <a
-                                                            href="{{ route('home.products.show', ['product' => $item->associatedModel->slug]) }}">
-                                                            {{ $item->name }}
-                                                        </a>
+                        <form action="{{ route('home.payment') }}" method="POST">
+                            @csrf
+                            <div class="your-order-area">
+                                <h3> سفارش شما </h3>
+                                <div class="your-order-wrap gray-bg-4">
+                                    <div class="your-order-info-wrap">
+                                        <div class="your-order-info">
+                                            <ul>
+                                                <li> محصول <span> جمع </span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="your-order-middle">
+                                            <ul>
+                                                @foreach (\Cart::getContent() as $item)
+                                                    <li class="d-flex align-items-center justify-content-between">
+                                                        <div class="">
+                                                            <a
+                                                                href="{{ route('home.products.show', ['product' => $item->associatedModel->slug]) }}">
+                                                                {{ $item->name }}
+                                                            </a>
 
-                                                        <div class="small text-gray-500" dir="rtl">
-                                                            {{ $item->quantity }} عدد ،
-                                                            {{ \App\Models\Attribute::find($item->attributes->attribute_id)->name }}
-                                                            :
-                                                            {{ $item->attributes->value }}
-                                                        </div>
-                                                    </div>
-
-                                                    <span>
-                                                        {{ number_format($item->price) }}تومان
-                                                        @if ($item->attributes->is_sale)
-                                                            <div class="small text-danger" dir="rtl">
-                                                                <span
-                                                                    style="font-size: 10px">%{{ $item->attributes->persent_sale }}
-                                                                    تخفیف</span>
+                                                            <div class="small text-gray-500" dir="rtl">
+                                                                {{ $item->quantity }} عدد ،
+                                                                {{ \App\Models\Attribute::find($item->attributes->attribute_id)->name }}
+                                                                :
+                                                                {{ $item->attributes->value }}
                                                             </div>
-                                                        @endif
-                                                    </span>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                    <div class="your-order-info order-subtotal">
-                                        <ul>
-                                            <li> مبلغ سفارش :
-                                                <span>
-                                                    {{ number_format(\Cart::getTotal() + cartTotalSaleAmount()) }}
-                                                    تومان
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                                        </div>
 
-                                    @if (cartTotalSaleAmount() > 0)
+                                                        <span>
+                                                            {{ number_format($item->price) }}تومان
+                                                            @if ($item->attributes->is_sale)
+                                                                <div class="small text-danger" dir="rtl">
+                                                                    <span
+                                                                        style="font-size: 10px">%{{ $item->attributes->persent_sale }}
+                                                                        تخفیف</span>
+                                                                </div>
+                                                            @endif
+                                                        </span>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
                                         <div class="your-order-info order-subtotal">
                                             <ul>
-                                                <li> مبلغ تخفیف کالاها :
+                                                <li> مبلغ سفارش :
                                                     <span>
-                                                        {{ number_format(cartTotalSaleAmount()) }}
+                                                        {{ number_format(\Cart::getTotal() + cartTotalSaleAmount()) }}
                                                         تومان
                                                     </span>
                                                 </li>
                                             </ul>
                                         </div>
 
-                                    @endif
-                                    @if (session()->has('coupon'))
-                                        <div class="your-order-info order-subtotal">
+                                        @if (cartTotalSaleAmount() > 0)
+                                            <div class="your-order-info order-subtotal">
+                                                <ul>
+                                                    <li> مبلغ تخفیف کالاها :
+                                                        <span>
+                                                            {{ number_format(cartTotalSaleAmount()) }}
+                                                            تومان
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        @endif
+                                        @if (session()->has('coupon'))
+                                            <div class="your-order-info order-subtotal">
+                                                <ul>
+                                                    <li> مبلغ کد تخفیف :
+                                                        <span>
+                                                            {{ number_format(session()->get('coupon.amount')) }}
+                                                            تومان
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        @endif
+                                        <div class="your-order-info order-shipping">
                                             <ul>
-                                                <li> مبلغ کد تخفیف :
-                                                    <span>
-                                                        {{ number_format(session()->get('coupon.amount')) }}
-                                                        تومان
-                                                    </span>
+                                                <li> هزینه ارسال :
+                                                    @if (cartTotalDeliverityAmount() == 0)
+                                                        <span>رایگان</span>
+                                                    @else
+                                                        <span>{{ number_format(cartTotalDeliverityAmount()) }} تومان</span>
+                                                    @endif
                                                 </li>
                                             </ul>
                                         </div>
-                                    @endif
-                                    <div class="your-order-info order-shipping">
-                                        <ul>
-                                            <li> هزینه ارسال :
-                                                @if (cartTotalDeliverityAmount() == 0)
-                                                    <span>رایگان</span>
-                                                @else
-                                                    <span>{{ number_format(cartTotalDeliverityAmount()) }} تومان</span>
-                                                @endif
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="your-order-info order-total">
-                                        <ul>
-                                            <li>جمع کل :
-                                                <span>{{ number_format(cartTotalAmount()) }} تومان</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="payment-method">
-                                    <div class="pay-top sin-payment">
-                                        <input id="zarinpal" class="input-radio" type="radio" value="zarinpal"
-                                            checked="checked" name="payment_method">
-                                        <label for="zarinpal"> درگاه پرداخت زرین پال </label>
-                                        <div class="payment-box payment_method_bacs">
-                                            <p>
-                                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
-                                                طراحان گرافیک است.
-                                            </p>
+                                        <div class="your-order-info order-total">
+                                            <ul>
+                                                <li>جمع کل :
+                                                    <span>{{ number_format(cartTotalAmount()) }} تومان</span>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
-                                    <div class="pay-top sin-payment">
-                                        <input id="pay" class="input-radio" type="radio" value="pay" name="payment_method">
-                                        <label for="pay">درگاه پرداخت پی</label>
-                                        <div class="payment-box payment_method_bacs">
-                                            <p>
-                                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
-                                                طراحان گرافیک است.
-                                            </p>
+                                    <div class="payment-method">
+                                        <div class="pay-top sin-payment">
+                                            <input id="zarinpal" class="input-radio" type="radio" value="zarinpal"
+                                                checked="checked" name="payment_method">
+                                            <label for="zarinpal"> درگاه پرداخت زرین پال </label>
+                                            <div class="payment-box payment_method_bacs">
+                                                <p>
+                                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
+                                                    طراحان گرافیک است.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="pay-top sin-payment">
+                                            <input id="pay" class="input-radio" type="radio" value="pay" name="payment_method">
+                                            <label for="pay">درگاه پرداخت پی</label>
+                                            <div class="payment-box payment_method_bacs">
+                                                <p>
+                                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
+                                                    طراحان گرافیک است.
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="Place-order mt-40">
+                                    <button type="submit">ثبت سفارش</button>
+                                </div>
                             </div>
-                            <div class="Place-order mt-40">
-                                <button type="submit">ثبت سفارش</button>
-                            </div>
-                        </div>
+                            <input type="hidden" id="address-input" name="address_id">
+                            </form>
                     </div>
 
                 </div>
@@ -292,6 +296,11 @@
 
 @section('script')
     <script>
+            $('#address-input').val($('#address-select').val());
+
+        $('#address-select').change(function() {
+            $('#address-input').val($(this).val());
+        });
         $('.province-select').change(function() {
 
             var provinceID = $(this).val();

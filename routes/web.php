@@ -16,6 +16,7 @@ use App\Http\Controllers\Home\CategoryController as HomeCategoryController;
 use App\Http\Controllers\Home\CommentController as HomeCommentController;
 use App\Http\Controllers\Home\CompareController;
 use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\Home\PaymentController;
 use App\Http\Controllers\Home\ProductController as HomeProductController;
 use App\Http\Controllers\Home\ProfileController;
 use App\Http\Controllers\Home\ShopController;
@@ -81,6 +82,8 @@ Route::prefix('profile')->name('home.')->group(function(){
     Route::post('/addresses', [AddressController::class , 'store'])->name('addresses.store');
     Route::put('/addresses/{address}', [AddressController::class , 'update'])->name('addresses.update');
 
+    Route::get('/orders', [CartController::class , 'usersProfileIndex'])->name('orders.users_profile.index');
+
 });
 Route::get('/get-province-cities-list', [AddressController::class , 'getProvinceCitiesLis']);
 
@@ -104,6 +107,9 @@ Route::put('/cart', [CartController::class , 'update'])->name('home.cart.update'
 Route::post('/check-coupon', [CartController::class , 'checkCoupon'])->name('home.coupons.check');
 Route::get('/checkout', [CartController::class , 'checkout'])->name('home.orders.checkout');
 
+Route::post('/payment', [PaymentController::class , 'payment'])->name('home.payment');
+Route::get('/payment-verify/{gatewayName}', [PaymentController::class , 'paymentVerify'])->name('home.payment_verify');
+
 
 Route::any('/login', [AuthController::class , 'login'])->name('login');
 Route::post('/check-otp', [AuthController::class , 'checkOtp']);
@@ -112,5 +118,6 @@ Route::post('/resend-otp', [AuthController::class , 'resendOtp']);
 
 Route::get('/test' , function () {
     // \Cart::clear();
-    dd(\Cart::getContent());
+    // dd(\Cart::getContent());
+    dd(session()->get('coupon'));
 });

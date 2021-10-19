@@ -126,7 +126,7 @@
 
                         <span>مبلغ سفارش :</span>
                         <span>
-                            {{ number_format( \Cart::getTotal() + cartTotalSaleAmount()) }}
+                            {{ number_format( \Cart::getTotal() + cartTotalSaleAmount() ) }}
                             تومان
 
                         </span>
@@ -158,7 +158,7 @@
                         @if (cartTotalDeliverityAmount()== 0)
                         <span class="text-danger">رایگان</span>
                         @else
-                            <span>{{ number_format(  cartTotalDeliverityAmount()) }} تومان</span>
+                            <span>{{ number_format( cartTotalDeliverityAmount() ) }} تومان</span>
                         @endif
                     </div>
                     <hr>

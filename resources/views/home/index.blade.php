@@ -389,7 +389,7 @@
                                                     style="width: 50px; height: 60px;">
                                                     <span class="p-2 plus" style="cursor: pointer">+</span>
                                                     <input class="text-center box quantity-input" type="text" name="qtybutton"
-                                                        style="width: 50px; height: 60px;" value="2"  data-max="5"/>
+                                                        style="width: 50px; height: 60px;" value="1"  data-max="5"/>
                                                     <span class="p-2 mines" style="cursor: pointer">-</span>
                                                 </div>
                                                 <div class="me-4">
