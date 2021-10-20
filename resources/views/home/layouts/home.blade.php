@@ -38,6 +38,8 @@
 
     @include('sweet::alert')
     @yield('script')
+
+    {!!  GoogleReCaptchaV3::init() !!}
 </body>
 
 

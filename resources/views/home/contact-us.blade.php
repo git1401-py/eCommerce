@@ -102,10 +102,17 @@
                                     <strong>{{ $message }}</strong>
                                 </p>
                             @enderror
+                            <div id="contact_us_id"></div>
+                            @error('g-recaptcha-response')
+                                <p class="input-error-validation">
+                                    <strong>{{ $message }}</strong>
+                                </p>
+                            @enderror
                             <button class="submit" type="submit"> ارسال پیام </button>
                         </form>
-                        <p class="form-messege"></p>
                     </div>
+                        {!!  GoogleReCaptchaV3::render(['contact_us_id'=>'contact_us']) !!}
+
                 </div>
             </div>
             <div class="contact-map pt-5">
