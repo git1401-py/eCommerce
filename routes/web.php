@@ -120,6 +120,10 @@ Route::post('/check-otp', [AuthController::class , 'checkOtp']);
 Route::post('/resend-otp', [AuthController::class , 'resendOtp']);
 
 
+Route::get('/about-us', [HomeController::class , 'aboutUs'])->name('home.about-us');
+Route::get('/contact-us', [HomeController::class , 'contactUs'])->name('home.contact-us');
+Route::post('/contact-us-form', [HomeController::class , 'contactUsForm'])->name('home.contact-us.form');
+
 Route::get('/test' , function () {
     // \Cart::clear();
     // dd(\Cart::getContent());

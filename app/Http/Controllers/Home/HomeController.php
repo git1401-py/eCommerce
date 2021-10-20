@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
+use App\Models\ContactUs;
 use App\Models\Product;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,6 +26,36 @@ class HomeController extends Controller
         dd($product->sale_check);*/
 
         return view('home.index' , compact('sliders' , 'indexTopBanners' , 'indexBottomBanners' , 'products'));
+    }
+    public function aboutUs()
+    {
+        $indexBottomBanners = Banner::where('type' , 'index-bottom')->where('is_active' , 1)->orderBy('priority')->get();
+
+        return view('home.about-us'  , compact('indexBottomBanners'));
+    }
+    public function contactUs()
+    {
+        $setting = Setting::findOrFail(1);
+        return view('home.contact-us'  , compact('setting') );
+    }
+    public function contactUsForm(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|min:4|max:50',
+            'email' => 'required|email',
+            'subject' => 'required|string|min:4|max:100',
+            'message' => 'required|string|min:4|max:3000',
+        ]);
+
+        $contact_us = new ContactUs();
+        $contact_us->name = $request->name;
+        $contact_us->email = $request->email;
+        $contact_us->subject = $request->subject;
+        $contact_us->text = $request->message;
+        $contact_us->save();
+
+        alert()->success('پیام شما ارسال شد', 'با تشکر');
+        return redirect()->back();
     }
 }
 // $parentMenId = Category::where('name', 'مردانه')->first()->id;
