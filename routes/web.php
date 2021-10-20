@@ -22,6 +22,7 @@ use App\Http\Controllers\Home\PaymentController;
 use App\Http\Controllers\Home\ProductController as HomeProductController;
 use App\Http\Controllers\Home\ProfileController;
 use App\Http\Controllers\Home\ShopController;
+use App\Http\Controllers\Home\SitemapController;
 use App\Http\Controllers\Home\WishlistController;
 use App\Models\User;
 use App\Notifications\OTPSms;
@@ -123,6 +124,10 @@ Route::post('/resend-otp', [AuthController::class , 'resendOtp']);
 Route::get('/about-us', [HomeController::class , 'aboutUs'])->name('home.about-us');
 Route::get('/contact-us', [HomeController::class , 'contactUs'])->name('home.contact-us');
 Route::post('/contact-us-form', [HomeController::class , 'contactUsForm'])->name('home.contact-us.form');
+
+Route::get('/sitemap', [SitemapController::class , 'index'])->name('home.sitemap.index');
+Route::get('/sitemap-products', [SitemapController::class , 'sitemapProducts'])->name('home.sitemap.products');
+Route::get('/sitemap-tags', [SitemapController::class , 'sitemapTags'])->name('home.sitemap.tags');
 
 Route::get('/test' , function () {
     // \Cart::clear();

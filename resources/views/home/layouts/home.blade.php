@@ -13,6 +13,8 @@
     @yield('css')
 
     <title>Home - @yield('title')</title>
+
+    {!! SEO::generate() !!}
 </head>
 
 <body>

@@ -9,10 +9,21 @@ use App\Models\Product;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class HomeController extends Controller
 {
     public function index(){
+
+        SEOTools::setTitle('Home');
+        SEOTools::setDescription('This is my page description');
+        SEOTools::opengraph()->setUrl(route('home.index'));
+        SEOTools::setCanonical('https://codecasts.com.br/lesson');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::twitter()->setSite('@LuizVinicius73');
+        SEOTools::jsonLd()->addImage('https://codecasts.com.br/img/logo.jpg');
+
+
 
         $sliders = Banner::where('type' , 'slider')->where('is_active' , 1)->orderBy('priority')->get();
         $indexTopBanners = Banner::where('type' , 'index-top')->where('is_active' , 1)->orderBy('priority')->get();
