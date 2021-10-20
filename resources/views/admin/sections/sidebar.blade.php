@@ -59,9 +59,9 @@
             <div class="collapse" id="collapseOrder">
                 <div class="card card-body">
                     <a class="nav-link text-dark p-3 sidebar-link collapse-item"
-                        href="#">سفارشات</a>
+                        href="{{ route('admin.orders.index') }}">سفارشات</a>
                     <a class="nav-link text-dark p-3 sidebar-link collapse-item"
-                    href="#">تراکنش ها</a>
+                    href="{{ route('admin.transactions.index') }}">تراکنش ها</a>
                     <a class="nav-link text-dark p-3 sidebar-link collapse-item"
                         href="{{ route('admin.coupons.index') }}">کوپن ها</a>
                 </div>

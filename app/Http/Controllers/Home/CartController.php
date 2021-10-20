@@ -126,7 +126,7 @@ class CartController extends Controller
 
     public function usersProfileIndex()
     {
-        $orders = Order::where('user_id' , auth()->id)->get();
+        $orders = Order::where('user_id' , auth()->id())->get();
         return view('home.users_profile.orders' , compact('orders'));
     }
 }
