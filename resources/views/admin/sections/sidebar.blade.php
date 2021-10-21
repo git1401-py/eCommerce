@@ -12,10 +12,25 @@
         </li> --}}
 
         <div class=" text-muted small"> <span class="small">کاربران</span></div>
-        <li class="nav-item  bottom-border-light">
-            <a href="#" class="nav-link text-white p-3 mb-2 sidebar-link ">
-                <i class="fas fa-store text-light  ml-3"></i>کاربران
-            </a>
+
+        <li class="nav-item bottom-border-light">
+            <p>
+                <a class="nav-link text-white p-3 mb-2 sidebar-link " data-bs-toggle="collapse" href="#collapseUser"
+                    role="button" aria-expanded="false" aria-controls="collapseUser">
+                    <i class="fas fa-users text-light fa-lg ml-3"></i>
+                    <span>کاربران</span>
+                </a>
+            </p>
+            <div class="collapse" id="collapseUser">
+                <div class="card card-body">
+                    <a class="nav-link text-dark p-3 sidebar-link collapse-item"
+                        href="{{ route('admin.users.index') }}">لیست کاربران</a>
+                    <a class="nav-link text-dark p-3 sidebar-link collapse-item"
+                    href="{{ route('admin.roles.index') }}">گروه های کاربری</a>
+                    <a class="nav-link text-dark p-3 sidebar-link collapse-item"
+                        href="{{ route('admin.permissions.index') }}">پرمیژن ها</a>
+                </div>
+            </div>
         </li>
         <div class=" text-muted small"> <span class="small">فروشگاه</span></div>
         <li class="nav-item">
@@ -23,29 +38,35 @@
                 <i class="fas fa-store text-light  ml-3"></i>برندها
             </a>
         </li>
-        <li class="nav-item  bottom-border-light">
-            <p>
-                <a class="nav-link text-white p-3 mb-2 sidebar-link " data-bs-toggle="collapse" href="#collapseExample"
-                    role="button" aria-expanded="false" aria-controls="collapseExample">
-                    <i class="fas fa-shopping-cart text-light fa-lg ml-3"></i>
-                    <span>محصولات</span>
-                </a>
-            </p>
-            <div class="collapse" id="collapseExample">
-                <div class="card card-body">
-                    <a class="nav-link text-dark p-3 sidebar-link collapse-item"
-                        href="{{ route('admin.products.index') }}">لیست محصولات</a>
-                    <a class="nav-link text-dark p-3 sidebar-link collapse-item"
-                    href="{{ route('admin.comments.index') }}">لیست کامنت ها</a>
-                    <a class="nav-link text-dark p-3 sidebar-link collapse-item"
-                        href="{{ route('admin.categories.index') }}">دسته بندی ها</a>
-                    <a class="nav-link text-dark p-3 sidebar-link collapse-item"
-                        href="{{ route('admin.attributes.index') }}">ویژگی ها</a>
-                    <a class="nav-link text-dark p-3 sidebar-link collapse-item"
-                        href="{{ route('admin.tags.index') }}">تگ ها</a>
+
+        {{-- {{ auth()->loginUsingId(2) }} --}}
+        {{-- @role('admin') --}}
+        {{-- @can('create-product') --}}
+            <li class="nav-item  bottom-border-light">
+                <p>
+                    <a class="nav-link text-white p-3 mb-2 sidebar-link " data-bs-toggle="collapse" href="#collapseExample"
+                        role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fas fa-shopping-cart text-light fa-lg ml-3"></i>
+                        <span>محصولات</span>
+                    </a>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        <a class="nav-link text-dark p-3 sidebar-link collapse-item"
+                            href="{{ route('admin.products.index') }}">لیست محصولات</a>
+                        <a class="nav-link text-dark p-3 sidebar-link collapse-item"
+                        href="{{ route('admin.comments.index') }}">لیست کامنت ها</a>
+                        <a class="nav-link text-dark p-3 sidebar-link collapse-item"
+                            href="{{ route('admin.categories.index') }}">دسته بندی ها</a>
+                        <a class="nav-link text-dark p-3 sidebar-link collapse-item"
+                            href="{{ route('admin.attributes.index') }}">ویژگی ها</a>
+                        <a class="nav-link text-dark p-3 sidebar-link collapse-item"
+                            href="{{ route('admin.tags.index') }}">تگ ها</a>
+                    </div>
                 </div>
-            </div>
-        </li>
+            </li>
+        {{-- @endcan --}}
+            {{-- @endrole --}}
         <div class=" text-muted small"> <span class="small">سفارشات</span></div>
 
         <li class="nav-item bottom-border-light">
