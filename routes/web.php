@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\BannerController;
@@ -42,9 +43,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin-panel/dashboard', function () {
-    return view('admin.dashboard');
-})->name('dashboard');
+Route::get('/admin-panel/dashboard' , [AdminController::class , 'index'])->name('dashboard');
 
 // Route::prefix('admin-panel/management')->name('admin.')->middleware(['role:admin|writer|product-management'])->group(function(){
 Route::prefix('admin-panel/management')->name('admin.')->group(function(){
@@ -138,6 +137,7 @@ Route::get('/sitemap-products', [SitemapController::class , 'sitemapProducts'])-
 Route::get('/sitemap-tags', [SitemapController::class , 'sitemapTags'])->name('home.sitemap.tags');
 
 Route::get('/test' , function () {
+    dd(auth()->user());
     // \Cart::clear();
     // dd(\Cart::getContent());
     dd(session()->get('coupon'));

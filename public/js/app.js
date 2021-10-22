@@ -5219,7 +5219,8 @@ __webpack_require__(/*! ./files/jquery.czMore-latest */ "./resources/js/admin/fi
 
 __webpack_require__(/*! ./files/kamadatepicker.holidays */ "./resources/js/admin/files/kamadatepicker.holidays.js");
 
-__webpack_require__(/*! ./files/kamadatepicker.min */ "./resources/js/admin/files/kamadatepicker.min.js"); // require('md.bootstrappersiandatetimepicker/dist/jquery.md.bootstrap.datetimepicker.js');
+__webpack_require__(/*! ./files/kamadatepicker.min */ "./resources/js/admin/files/kamadatepicker.min.js"); // require("chart.js");
+// require('md.bootstrappersiandatetimepicker/dist/jquery.md.bootstrap.datetimepicker.js');
 
 
 __webpack_require__(/*! md.bootstrappersiandatetimepicker/dist/mds.bs.datetimepicker.js */ "./node_modules/md.bootstrappersiandatetimepicker/dist/mds.bs.datetimepicker.js");

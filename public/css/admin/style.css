@@ -58,6 +58,24 @@ body {
   border-radius: 5px;
 
  }
+ .sidebar-link-active{
+  background: linear-gradient(0.25turn, rgba( 	230, 100, 101,.5), rgba(145, 152, 229,.5));
+
+  border-radius: 5px;
+
+ }
+ .scrollable {
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(145, 152, 229,.5) #e0e0e0;
+    /* scrollbar-color: #6969dd #e0e0e0;
+     scrollbar-color: auto | dark | light | <color>;
+    scrollbar-width: auto | thin | none;
+      scrollbar-gutter: [ auto | [ stable | always ] && both? && force? ] */
+  }
+  .scrollable:hover {
+    scrollbar-color: rgba( 	230, 100, 101,.5) #e0e0e0;
+  }
 
  .current {
   background:  #e66465;

@@ -62,46 +62,42 @@
 @import "about-us";
 @import "contact-us";
 
-
-
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 @import "./files/icons.min.css";
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css);
 
-
 body {
-  font-family: "Vazir" !important;
-background-color: $gray;
-direction: rtl;
+    font-family: "Vazir" !important;
+    background-color: $gray;
+    direction: rtl;
 }
-a{
+a {
     text-decoration: none;
-    color:$black;
+    color: $black;
 }
-li{
+li {
     list-style: none;
 }
 .sli {
-  line-height: unset;
+    line-height: unset;
 }
 .not-in-stock {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  align-items: center;
-  background: #7a7a7a;
-  height: 35px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    background: #7a7a7a;
+    height: 35px;
 }
 
 .input-error-validation {
-  text-align: right;
-  font-size: 11px;
-  color: red;
+    text-align: right;
+    font-size: 11px;
+    color: red;
 }
-.bg-red{
+.bg-red {
     background-color: red;
 }
-
 
 // .swiper-container {
 //     width: calc(100vw - 70px);
@@ -147,9 +143,9 @@ li{
 //   }
 .swiper {
     width: 100%;
-  }
+}
 
-  .swiper-slide {
+.swiper-slide {
     text-align: center;
     font-size: 18px;
     background: #fff;
@@ -167,4 +163,39 @@ li{
     -ms-flex-align: center;
     -webkit-align-items: center;
     align-items: center;
-  }
+}
+
+/*PRELOADING*********************/
+#overlayer {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 10000;
+    background: #4a4a4a;
+}
+.loader {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    z-index: 20000;
+    // border: 4px solid #fff;
+    top: 50%;
+    left: 50%;
+    // animation: loader 2s infinite ease;
+}
+
+.loader-inner {
+    vertical-align: top;
+    display: inline-block;
+    width: 100%;
+    background-color: #fff;
+    animation: loader-inner 2s infinite ease-in;
+}
+@keyframes loader{
+    0%{transform: rotate(0deg);}
+    25%{transform: rotate(180deg);}
+    50%{transform: rotate(270deg);}
+    100%{transform: rotate(360deg);}
+}
+@keyframes loader-inner{}

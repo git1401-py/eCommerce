@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\ProductVariation;
 use App\Models\Transaction;
+use App\Notifications\PaymentReceipt;
 use Illuminate\Support\Facades\DB;
 
 class Payment
@@ -74,6 +75,8 @@ class Payment
                 'payment_status' => 1,
                 'status' => 1,
             ]);
+
+            auth()->user()->notify(new PaymentReceipt($order->id , $order->paying_amount , $refId ));
 
             foreach (\Cart::getContent() as $item) {
                 $variation = ProductVariation::find($item->attributes->id);

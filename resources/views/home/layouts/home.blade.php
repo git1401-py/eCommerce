@@ -19,6 +19,13 @@
 
 <body>
     <div class="wrapper">
+        <div id="overlayer"></div>
+        <span class="loader">
+            {{-- <span class="loader-inner"></span> --}}
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+        </span>
 
         @include('home.sections.header')
 
@@ -40,6 +47,12 @@
 
     @include('sweet::alert')
     @yield('script')
+    <script>
+        // $(window).load(function(){
+            $(".loader").delay(2000).fadeOut("slow");
+            $("#overlayer").delay(2000).fadeOut("slow");
+        // })
+    </script>
 
     {!!  GoogleReCaptchaV3::init() !!}
 </body>
