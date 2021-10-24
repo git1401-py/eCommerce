@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\Category;
 use App\Models\City;
 use App\Models\Coupon;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\Province;
 use Carbon\Carbon;
 
@@ -110,4 +112,23 @@ function province_name($provinceId)
 function city_name($cityId)
 {
     return City::findOrFail($cityId)->name;
+}
+
+function subProducts($categoryParentName)
+{
+    $menParentCategoryId = Category::where('name' , $categoryParentName)->first()->id;
+    $menCategories = Category::where('parent_id' , $menParentCategoryId)->get();
+    $menCategoriesId = $menCategories->map(function($item){
+
+        return $item->id;
+    });
+    $products = Product::where('is_active' , 1)->get();
+    $menProducts = [];
+    foreach ($products as $product) {
+        if(in_array($product->category_id ,$menCategoriesId->toArray())){
+            array_push($menProducts , $product);
+        }
+    }
+
+    return $menProducts;
 }

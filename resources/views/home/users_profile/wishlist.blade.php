@@ -5,14 +5,14 @@
 
 @section('content')
 
-<div class="container-fluid my-2">
+<div class="container-fluid bg-gray-200 my-2">
     <div class="row justify-content-start align-items-center p-3">
         <div class="col-4">
 
               <nav dir="ltr" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">لیست علاقه مندی ها</li>
-                  <li class="breadcrwishlistumb-item"><a href="{{ route('home.index') }}">صفحه اصلی</a></li>
+                  <li class="breadcrumb-item"><a href="{{ route('home.index') }}">صفحه اصلی</a></li>
                 </ol>
               </nav>
         </div>

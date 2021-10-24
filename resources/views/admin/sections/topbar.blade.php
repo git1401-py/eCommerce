@@ -5,25 +5,27 @@
         <h4 class="text-light mb-0 ">مدیریت</h4>
       </div>
       <div class="col-md-5">
-        <form>
+        {{-- <form>
           <div class="input-group">
               <button type="button" class="btn btn-white rounded-circle search-button"><i class="fas fa-search text-danger"></i>
               </button>
             <input type="text" placeholder="جستجو..." class="form-control text-light search-input">
           </div>
-        </form>
+        </form> --}}
       </div>
       <div class="col-md-4">
         <ul class="navbar-nav ">
             <div class="w-auto  d-flex me-auto">
-                <li class="nav-item px-1 icon-parent"><a href="#" class="nave-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a></li>
-          <li class="nav-item px-1 icon-parent"><a href="#" class="nave-link icon-bullet"><i class="fas fa-bell text-muted fa-lg"></i></a></li>
-          <li class="nav-item px-1 "><a href="#" class="nave-link"><i class="fas fa-sign-out-alt  text-danger fa-lg" data-toggle="modal" data-target="#sign-out"></i></a></li>
+                {{-- <li class="nav-item px-1 icon-parent"><a href="{{ route('admin.comments.index') }}" class="nave-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a></li> --}}
+          {{-- <li class="nav-item px-1 icon-parent"><a href="#" class="nave-link icon-bullet"><i class="fas fa-bell text-muted fa-lg"></i></a></li> --}}
+          <li class="nav-item px-1 "><a href="{{ route('logout') }}" class="nave-link"><i class="fas fa-sign-out-alt  text-danger fa-lg" data-toggle="modal" data-target="#sign-out"></i></a></li>
           <li class="nav-item px-1 me-md-2 position-relative">
             <a href="" class="nav-link text-white collapse-sidebar-link p-0  collapsed" data-toggle="collapse" data-target="#collapseadmin" aria-expanded="true" aria-controls="collapseadmin">
                 <div class="text-center">
-                    <img src="{{ asset('images/admin.jpeg') }}" width="40" class="rounded-circle">
-                    <div class="text-white small">خودم </div>
+                    <img class="card-img-top rounded-circle"
+                    src="{{ url(env('USER_IMAGES_UPLOAD_PATH') . auth()->user()->avatar) }}"
+                    alt="{{ auth()->user()->avatar }}" style="width: 50px; height:50px;">
+                    {{-- <div class="text-white small">{{ auth()->user()->name == null ? auth()->user()->cellphone : auth()->user()->name }} </div> --}}
                   </div>
             </a>
             <div
@@ -46,19 +48,19 @@
 
   </div>
 <!--  modal -->
-<div class="modal fade" id="sign-out">
+{{-- <div class="modal fade" id="sign-out">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">میخواهید خارج شوید؟</h4>
-          <button type="button" class="close mr-auto ml-0" data-dismiss="modal">&times;</button>
+          <a type="button" class="close mr-auto ml-0" data-dismiss="modal">&times;</a>
         </div>
         <div class="modal-body text-muted small">برای خارج شدن کلیک کن</div>
         <div class="modal-footer d-flex justify-content-between">
-          <button type="button" class="btn btn-success m-1" data-dismiss="modal">در همین صفحه باقی می مانم</button>
-          <button type="button" class="btn btn-danger m-1" data-dismiss="modal">خارج می شوم</button>
+          <a type="button" class="btn btn-success m-1" data-dismiss="modal">در همین صفحه باقی می مانم</a>
+          <a type="button" class="btn btn-danger m-1" data-dismiss="modal" href="{{ route('logout') }}">خارج می شوم</a>
         </div>
       </div>
     </div>
-  </div>
+  </div>--}}
   <!--  End of modal -->

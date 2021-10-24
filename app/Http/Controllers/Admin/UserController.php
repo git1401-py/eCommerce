@@ -42,7 +42,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'cellphone' => 'required'
+            'cellphone' => 'required|iran_mobile'
         ]);
         try {
             DB::beginTransaction();

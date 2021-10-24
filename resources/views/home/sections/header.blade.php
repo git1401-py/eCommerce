@@ -1,18 +1,18 @@
-<header class="header-area sticky-bar">
-    <div class="main-header-wrap">
+<header class="header-area sticky-bar m-0">
+    <div class="main-header-wrap bg-lightblue m-0">
         <div class="container">
             <div class="row">
 
                 <div class="col-xl-3 col-lg-3">
-                    <div class="header-right-wrap" style="padding-top: 40px">
+                    <div class="header-right-wrap" style="padding-top: 40px; justify-content: flex-start;">
 
 
                         <div class="setting-wrap">
                             <button class="setting-active">
                                 <i class="sli sli-settings"></i>
                             </button>
-                            <div class="setting-content">
-                                <ul class="text-end">
+                            <div class="setting-content px-0 m-0">
+                                <ul class="text-end px-0 pe-3">
                                     @auth
                                         <li class="my-3"><a href="{{ route('home.users_profile.index') }}"> پروفایل </a></li>
                                     @else
@@ -139,12 +139,10 @@
                     <div class="main-menu text-center">
                         <nav>
                             <ul>
-                                <li class="angle-shape">
-                                    <a href="{{ route('home.about-us') }}"> درباره ما </a>
+
+                                <li class="">
+                                    <a href="{{ route( 'home.index' ) }}"> صفحه اصلی </a>
                                 </li>
-
-                                <li><a href="{{ route('home.contact-us') }}"> تماس با ما </a></li>
-
                                 <li class="angle-shape">
                                     <a style="cursor:pointer"> فروشگاه </a>
 
@@ -155,7 +153,8 @@
 
                                         @foreach ($parentCategories as $parentCategory)
                                         <li>
-                                            <a class="menu-title" href="{{ route('home.categories.show' , ['category' => $parentCategory->slug]) }}">{{ $parentCategory->name }}</a>
+                                            <a class="menu-title">{{ $parentCategory->name }}</a>
+                                            {{-- <a class="menu-title" href="{{ route('home.categories.show' , ['category' => $parentCategory->slug]) }}">{{ $parentCategory->name }}</a> --}}
 
                                             <ul>
                                                 @foreach ($parentCategory->children as $childCategory)
@@ -168,9 +167,12 @@
                                     </ul>
                                 </li>
 
-                                <li class="angle-shape">
-                                    <a href="{{ route( 'home.index' ) }}"> صفحه اصلی </a>
+                                <li class="">
+                                    <a href="{{ route('home.about-us') }}"> درباره ما </a>
                                 </li>
+
+                                <li><a href="{{ route('home.contact-us') }}"> تماس با ما </a></li>
+
                             </ul>
                         </nav>
                     </div>
@@ -338,7 +340,7 @@
         <i class="sli sli-close"></i>
     </a>
 
-    <div class="header-mobile-aside-wrap">
+    <div class="header-mobile-aside-wrap  bg-lightblue">
         <div class="mobile-search">
             <form class="search-form" action="#">
                 <input type="text" placeholder=" ... جستجو " />
@@ -367,7 +369,8 @@
 
                             @foreach ($parentCategories as $parentCategory)
                             <li class="menu-item-has-children">
-                                <a class="" href="{{ route('home.categories.show' , ['category' => $parentCategory->slug]) }}">{{ $parentCategory->name }}</a>
+                                {{-- <a class="" href="{{ route('home.categories.show' , ['category' => $parentCategory->slug]) }}">{{ $parentCategory->name }}</a> --}}
+                                <a class="" >{{ $parentCategory->name }}</a>
 
                                 <ul class="dropdown">
                                     @foreach ($parentCategory->children as $childCategory)

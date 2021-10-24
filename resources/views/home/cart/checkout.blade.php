@@ -1,7 +1,20 @@
 @extends('home.layouts.home')
 @section('title')
-    سبد خرید
+    سفارش خرید
 @endsection
+<div class="container-fluid bg-gray-200 my-2">
+    <div class="row justify-content-start align-items-center p-3">
+        <div class="col-4">
+
+              <nav dir="ltr" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">سفارش خرید</li>
+                  <li class="breadcrumb-item"><a href="{{ route('home.index') }}">صفحه اصلی</a></li>
+                </ol>
+              </nav>
+        </div>
+    </div>
+</div>
 
 @section('content')
     <div class="checkout-main-area py-3 text-right " style="direction: rtl;">

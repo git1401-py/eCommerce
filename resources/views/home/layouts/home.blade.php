@@ -18,12 +18,12 @@
 </head>
 
 <body>
-    <div class="wrapper">
+    <div class="wrapper bg-white">
         <div id="overlayer"></div>
         <span class="loader">
             {{-- <span class="loader-inner"></span> --}}
             <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
+                <span class="visually-hidden">SITE...</span>
               </div>
         </span>
 

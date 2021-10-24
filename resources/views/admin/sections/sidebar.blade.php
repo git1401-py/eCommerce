@@ -131,24 +131,7 @@
 
 
 
-        <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link "><i
-                    class="fas fa-user text-light fa-lg ml-3"></i>پروفایل</a></li>
-        <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"><i
-                    class="fas fa-envelope text-light fa-lg ml-3"></i>صندوق ورودی</a></li>
-        <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"><i
-                    class="fas fa-shopping-cart text-light fa-lg ml-3"></i>فروش ها</a></li>
-        <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"><i
-                    class="fas fa-chart-line text-light fa-lg ml-3"></i>آنالیز</a></li>
-        <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"><i
-                    class="fas fa-chart-bar text-light fa-lg ml-3"></i>نمودار</a></li>
-        <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"><i
-                    class="fas fa-table text-light fa-lg ml-3"></i>جداول</a></li>
-        <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"><i
-                    class="fas fa-wrench text-light fa-lg ml-3"></i>تنظیمات</a></li>
-        <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"><i
-                    class="fas fa-file-alt text-light fa-lg ml-3"></i>مطالب</a></li>
-        <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 cerrent "><i
-                    class="fas fa-home text-light fa-lg ml-3"></i>مدیریت</a></li>
+        
 
     </ul>
 </div>

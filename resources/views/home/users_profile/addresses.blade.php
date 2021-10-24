@@ -5,7 +5,7 @@
 
 @section('content')
 
-<div class="container-fluid my-2">
+<div class="container-fluid bg-gray-200 my-2">
     <div class="row justify-content-start align-items-center p-3">
         <div class="col-4">
 

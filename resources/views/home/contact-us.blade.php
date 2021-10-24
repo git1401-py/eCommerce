@@ -10,27 +10,19 @@
 @endsection
 
 @section('content')
+<div class="container-fluid bg-gray-200 my-2">
+    <div class="row justify-content-start align-items-center p-3">
+        <div class="col-4">
 
-    <div class="slider-area2 mb-3">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcrumb-area pt-35 pb-35 bg-gray" style="direction: rtl;">
-                        <div class="container">
-                            <div class="breadcrumb-content text-center">
-                                <ul>
-                                    <li>
-                                        <a href="index.html">صفحه ای اصلی</a>
-                                    </li>
-                                    <li class="active"> تماس با ما </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+              <nav dir="ltr" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">تماس با ما</li>
+                  <li class="breadcrumb-item"><a href="{{ route('home.index') }}">صفحه اصلی</a></li>
+                </ol>
+              </nav>
         </div>
     </div>
+</div>
 
     <div class="contact-area pt-2 pb-2 bg-white">
         <div class="container">

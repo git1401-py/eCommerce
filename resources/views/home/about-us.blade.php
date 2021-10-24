@@ -5,23 +5,16 @@
 
 @section('content')
 
-<div class="slider-area2 mb-3">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="breadcrumb-area pt-35 pb-35 bg-gray" style="direction: rtl;">
-                    <div class="container">
-                        <div class="breadcrumb-content text-center">
-                            <ul>
-                                <li>
-                                    <a href="index.html">صفحه ای اصلی</a>
-                                </li>
-                                <li class="active"> در باره ما </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="container-fluid bg-gray-200 my-2">
+    <div class="row justify-content-start align-items-center p-3">
+        <div class="col-4">
+
+              <nav dir="ltr" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">درباره ما</li>
+                  <li class="breadcrumb-item"><a href="{{ route('home.index') }}">صفحه اصلی</a></li>
+                </ol>
+              </nav>
         </div>
     </div>
 </div>
@@ -37,7 +30,7 @@
             <div class="col-lg-6 text-end">
                 <div class="story-details pl-2">
                     <div class="story-details-top">
-                        <h2> خوش آمدید به  <span> وب پروگ</span></h2>
+                        <h2> خوش آمدید به  <span> SITE.ir</span></h2>
                         <p>
                             لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است
                         </p>

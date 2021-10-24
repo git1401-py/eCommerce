@@ -19,7 +19,7 @@ class OTPSms extends Notification
         $this->code = $code;
 
     }
-
+ 
     public function via($notifiable)
     {
         return [SmsChannel::class];

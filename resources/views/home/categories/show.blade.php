@@ -5,7 +5,7 @@
 
 @section('content')
 
-<div class="container-fluid my-2">
+<div class="container-fluid bg-gray-200 my-2">
     <div class="row justify-content-start align-items-center p-3">
         <div class="col-4">
 
@@ -254,76 +254,79 @@
                         </div>
                         <!-- Modal -->
                         @foreach ($products as $product)
-                            <div class="modal fade" id="productModal-{{$product->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-scrollable  modal-xl">
-                                    <div class="modal-content text-end small" style="direction: rtl;">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="container-fluid">
-                                                <div class="row">
-                                                    <div class="col-md-7 col-sm-12">
-                                                        <div class="">
-                                                            <h4 class="text-right mb-4">{{ $product->name }}</h4>
-                                                            <div class="text-end variation-price">
-                                                                @if ($product->quantity_check)
+                        <div class="modal fade" id="productModal-{{ $product->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable  modal-xl">
+                                <div class="modal-content text-end small" style="direction: rtl;">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-7 col-sm-12">
+                                                    <div class="">
+                                                        <h4 class="text-right mb-4">{{ $product->name }}</h4>
+                                                        <div class="text-end variation-price-{{ $product->id }}">
+                                                            @if ($product->quantity_check)
 
-                                                                    @if ($product->sale_check)
-                                                                        <span class="fw-bolder text-danger fa-2x" >
-                                                                            {{ number_format($product->sale_check->sale_price) }}
-                                                                            تومان
-                                                                        </span>
-                                                                        <del class="small">
-                                                                            {{ number_format($product->sale_check->price) }}
+                                                                @if ($product->sale_check)
+                                                                    <span class="fw-bolder text-danger fa-2x">
+                                                                        {{ number_format($product->sale_check->sale_price) }}
+                                                                        تومان
+                                                                    </span>
+                                                                    <del class="small">
+                                                                        {{ number_format($product->sale_check->price) }}
 
-                                                                            تومان
-                                                                        </del>
-                                                                    @else
-                                                                        <span class="fw-bolder text-danger fa-2x">
-                                                                            {{ number_format($product->price_check->price) }}
-                                                                            تومان
-                                                                        </span>
-                                                                    @endif
-
+                                                                        تومان
+                                                                    </del>
                                                                 @else
-                                                                    <span class="badge rounded-pill bg-danger bg-opacity-75">
-                                                                    ناموجود
-                                                                </span>
+                                                                    <span class="fw-bolder text-danger fa-2x">
+                                                                        {{ number_format($product->price_check->price) }}
+                                                                        تومان
+                                                                    </span>
                                                                 @endif
 
-                                                            </div>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <div class="my-2 small">
-                                                                    <div
-                                                                        data-rating-stars="5"
-                                                                        data-rating-readonly="true"
-                                                                        data-rating-value="{{ ceil($product->rates->avg('rate')) }}"
-                                                                        >
-                                                                    </div>
+                                                            @else
+                                                                <span class="badge rounded-pill bg-danger bg-opacity-75">
+                                                                    ناموجود
+                                                                </span>
+                                                            @endif
+
+                                                        </div>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="my-2 small">
+                                                                <div data-rating-stars="5" data-rating-readonly="true"
+                                                                    data-rating-value="{{ ceil($product->rates->avg('rate')) }}">
                                                                 </div>
-                                                                <span class="small border-end">___<a href="#">{{ $product->category->name }}</a></span>
                                                             </div>
-                                                            <p class="">
-                                                                {{ $product->description }}
-                                                            </p>
-                                                            <div class="pro-details-list">
-                                                                <ul class="">
-                                                                    @foreach ($product->attributes()->with('attribute')->get() as $attribute)
-                                                                        <li> -
-                                                                            {{ $attribute->attribute->name }}: {{ $attribute->value }}
-                                                                        </li>
-                                                                    @endforeach
-                                                                </ul>
-                                                            </div>
-                                                            <hr>
+                                                            <span class="pe-2 small border-end"><a href="#">
+                                                                    ({{ $product->approvedComments()->count() }}) دیدگاه</a></span>
+                                                            {{-- <span class="small border-end">___<a href="#">{{ $product->category->name }}</a></span> --}}
+                                                        </div>
+                                                        <p class="">
+                                                            {{ $product->description }}
+                                                        </p>
+                                                        <div class="pro-details-list">
+                                                            <ul class="">
+                                                                @foreach ($product->attributes()->with('attribute')->get() as $attribute)
+                                                                    <li> -
+                                                                        {{ $attribute->attribute->name }}: {{ $attribute->value }}
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                        <hr>
+                                                        <form action="{{ route('home.cart.add') }}" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+
                                                             @if ($product->quantity_check)
                                                                 @php
-                                                                    if($product->sale_check)
-                                                                    {
+                                                                    if ($product->sale_check) {
                                                                         $variationProductSelected = $product->sale_check;
-                                                                    }else{
+                                                                    } else {
                                                                         $variationProductSelected = $product->price_check;
                                                                     }
                                                                 @endphp
@@ -333,12 +336,13 @@
                                                                         <div class="my-2 w-50">
 
                                                                             <span>{{ App\Models\Attribute::find($product->variations->first()->attribute_id)->name }}</span>
-                                                                            <select class="form-control variation-select">
-                                                                                @foreach ($product->variations()->where('quantity' , '>' , 0)->get() as $variation)
+                                                                            <select name="variation" class="form-control variation-select"
+                                                                                data-id={{ $product->id }}>
+                                                                                @foreach ($product->variations()->where('quantity', '>', 0)->get() as $variation)
                                                                                     <option
-                                                                                    value="{{ json_encode($variation->only(['id' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
-                                                                                    {{ $variationProductSelected->id == $variation->id ? 'selected' : '' }}
-                                                                                    >{{ $variation->value }}</option>
+                                                                                        value="{{ json_encode($variation->only(['id', 'quantity', 'is_sale', 'sale_price', 'price'])) }}"
+                                                                                        {{ $variationProductSelected->id == $variation->id ? 'selected' : '' }}>
+                                                                                        {{ $variation->value }}</option>
                                                                                 @endforeach
                                                                             </select>
                                                                         </div>
@@ -350,99 +354,110 @@
                                                                         style="width: 50px; height: 60px;">
                                                                         <span class="p-2 plus" style="cursor: pointer">+</span>
                                                                         <input class="text-center box quantity-input" type="text"
-                                                                            style="width: 50px; height: 60px;" value="2"  data-max="5"/>
+                                                                            name="qtybutton" style="width: 50px; height: 60px;" value="1"
+                                                                            data-max="5" />
                                                                         <span class="p-2 mines" style="cursor: pointer">-</span>
                                                                     </div>
                                                                     <div class="me-4">
-                                                                        <a href="#">افزودن به سبد خرید</a>
+                                                                        <button tupe="submit" class=" btn btn-outline-dark">
+                                                                            <i class="sli sli-bag"></i> افزودن به سبد خرید
+                                                                        </button>
                                                                     </div>
                                                                     <div class="p-2">
                                                                         @auth
                                                                             @if ($product->checkUserWishList(auth()->id()))
-                                                                                <a title="Remove From Wishlist" href="{{ route('home.wishlist.remove' , ['product' => $product->id]) }}"><i class="fas fa-heart" style="color:#ff3535"></i></a>
+                                                                                <a title="Remove From Wishlist"
+                                                                                    href="{{ route('home.wishlist.remove', ['product' => $product->id]) }}"><i
+                                                                                        class="fas fa-heart" style="color:#ff3535"></i></a>
                                                                             @else
-                                                                                <a title="Add To Wishlist" href="{{ route('home.wishlist.add' , ['product' => $product->id]) }}"><i class="sli sli-heart"></i></a>
+                                                                                <a title="Add To Wishlist"
+                                                                                    href="{{ route('home.wishlist.add', ['product' => $product->id]) }}"><i
+                                                                                        class="sli sli-heart"></i></a>
                                                                             @endif
                                                                         @else
-                                                                            <a title="Add To Wishlist" href="{{ route('home.wishlist.add' , ['product' => $product->id]) }}"><i class="sli sli-heart"></i></a>
+                                                                            <a title="Add To Wishlist"
+                                                                                href="{{ route('home.wishlist.add', ['product' => $product->id]) }}"><i
+                                                                                    class="sli sli-heart"></i></a>
                                                                         @endauth
                                                                     </div>
                                                                     <div class="p-2">
-                                                                        <a title="Add To Compare" href="{{ route('home.compare.add' , ['product' => $product]) }}">
-                                                                            <i class="sli sli-refresh"></i>
-                                                                        </a>
+                                                                        <a title="Add To Compare"
+                                                                            href="{{ route('home.compare.add', ['product' => $product]) }}">
+                                                                            <i class="sli sli-refresh"></i></a>
                                                                     </div>
                                                                 </div>
                                                             @endif
-                                                            <div class="mt-3">
-                                                                <span>دسته بندی :</span>
-                                                                <ul class="list-group list-group-horizontal justify-content-en">
+                                                        </form>
+                                                        <div class="mt-3">
+                                                            <span>دسته بندی :</span>
+                                                            <ul class="list-group list-group-horizontal justify-content-en">
+                                                                <li class="list-group-item p-0 border-0">
+                                                                    <a href="#">
+                                                                        {{ $product->category->parent->name }} ،
+                                                                        {{ $product->category->name }}
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="my-3">
+                                                            <span>تگ ها :</span>
+                                                            <ul class="list-group list-group-horizontal justify-content-en">
+                                                                @foreach ($product->tags as $tag)
                                                                     <li class="list-group-item p-0 border-0">
-                                                                        <a href="{{ route('home.categories.show' , ['category' => $product->category->slug ]) }}">
-                                                                            {{ $product->category->parent->name }} ، {{ $product->category->name }}
-                                                                        </a>
+                                                                        <a href="#">{{ $tag->name }}{{ $loop->last ? '' : '،' }}</a>
                                                                     </li>
-                                                                </ul>
+                                                                @endforeach
+
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5 col-sm-12">
+                                                    <!-- Swiper -->
+
+                                                    <div class="modal-swiper">
+                                                        <div class="swiper swiper-custom" style="">
+                                                            <div class="swiper-wrapper">
+                                                                <div class="swiper-slide">
+                                                                    <img src="{{ asset(env('PRODUCT_IMAGES_UPLOAD_PATH') . $product->primary_image) }}"
+                                                                        alt="{{ $product->name }}">
+                                                                </div>
+                                                                @foreach ($product->images as $image)
+                                                                    <div class="swiper-slide">
+                                                                        <img src="{{ asset(env('PRODUCT_IMAGES_UPLOAD_PATH') . $image->image) }}"
+                                                                            alt="">
+                                                                    </div>
+                                                                @endforeach
                                                             </div>
-                                                            <div class="my-3">
-                                                                <span>تگ ها :</span>
-                                                                <ul class="list-group list-group-horizontal justify-content-en">
-                                                                    @foreach ($product->tags as $tag)
-                                                                        <li class="list-group-item p-0 border-0">
-                                                                            <a href="#">{{ $tag->name }}{{ $loop->last ? '' : '،' }}</a>
-                                                                        </li>
-                                                                    @endforeach
-
-
-                                                                </ul>
+                                                            <!-- Add Navigation -->
+                                                            <div class="swiper-button-next swiper-button-white"></div>
+                                                            <div class="swiper-button-prev swiper-button-white"></div>
+                                                        </div>
+                                                        <div class="swiper swiper-product gallery-thumbs gallery-thumbs3">
+                                                            <div class="swiper-wrapper">
+                                                                <div class="swiper-slide">
+                                                                    <img src="{{ asset(env('PRODUCT_IMAGES_UPLOAD_PATH') . $product->primary_image) }}"
+                                                                        alt="{{ $product->name }}">
+                                                                </div>
+                                                                @foreach ($product->images as $image)
+                                                                    <div class="swiper-slide">
+                                                                        <img src="{{ asset(env('PRODUCT_IMAGES_UPLOAD_PATH') . $image->image) }}"
+                                                                            alt="">
+                                                                    </div>
+                                                                @endforeach
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-5 col-sm-12">
-                                                        <!-- Swiper -->
 
-                                                        <div class="modal-swiper">
-                                                            <div class="swiper swiper-custom" style="">
-                                                                <div class="swiper-wrapper">
-                                                                    <div class="swiper-slide">
-                                                                        <img  src="{{ asset(env('PRODUCT_IMAGES_UPLOAD_PATH') . $product->primary_image) }}"
-                                                                        alt="{{ $product->name }}">
-                                                                    </div>
-                                                                    @foreach ($product->images as $image)
-                                                                        <div class="swiper-slide">
-                                                                            <img  src="{{ asset(env('PRODUCT_IMAGES_UPLOAD_PATH') . $image->image) }}"
-                                                                            alt="">
-                                                                        </div>
-                                                                    @endforeach
-                                                                </div>
-                                                                <!-- Add Navigation -->
-                                                                <div class="swiper-button-next swiper-button-white"></div>
-                                                                <div class="swiper-button-prev swiper-button-white"></div>
-                                                            </div>
-                                                            <div class="swiper swiper-product gallery-thumbs gallery-thumbs3">
-                                                                <div class="swiper-wrapper">
-                                                                    <div class="swiper-slide">
-                                                                        <img  src="{{ asset(env('PRODUCT_IMAGES_UPLOAD_PATH') . $product->primary_image) }}"
-                                                                        alt="{{ $product->name }}">
-                                                                    </div>
-                                                                    @foreach ($product->images as $image)
-                                                                        <div class="swiper-slide">
-                                                                            <img  src="{{ asset(env('PRODUCT_IMAGES_UPLOAD_PATH') . $image->image) }}"
-                                                                            alt="">
-                                                                        </div>
-                                                                    @endforeach
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
+
                                 </div>
                             </div>
+                        </div>
 
                         @endforeach
                         <!-- Modal end -->

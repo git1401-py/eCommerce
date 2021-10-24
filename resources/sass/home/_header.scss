@@ -217,11 +217,11 @@
         }
         .setting-content {
             background: #fff none repeat scroll 0 0;
-            padding: 26px 30px 32px;
+            padding: 26px 0px 32px;
             position: absolute;
             right: 0;
             top: 100%;
-            width: 200px;
+            width: 240px;
             z-index: 9999;
             box-shadow: 0 0 20px 0.4px rgba(0, 0, 0, 0.1);
             max-height: 636px;
@@ -238,10 +238,20 @@
             }
             ul {
                 li {
-                    padding-bottom: 25px;
                     &:last-child {
                         padding-bottom: 0px;
                     }
+                    &:hover {
+                    }
+                    a{
+                        padding : 10px;
+                        border-radius: 5px;
+                        &:hover {
+                            background-color: $theme-color;
+                            color: #fff;
+                        }
+                    }
+
                     h4 {
                         font-size: 16px;
                         margin: 0;
@@ -272,9 +282,7 @@
                 }
             }
         }
-        &:hover {
-            color: $theme-color;
-        }
+
     }
 }
 .cart-wrap {

@@ -80,11 +80,13 @@ Route::prefix('admin-panel/management')->name('admin.')->group(function(){
     Route::get('/products/{product}/category-edit' , [ProductController::class , 'editCategory'])->name('products.category.edit');
     Route::put('/products/{product}/category-update' , [ProductController::class , 'updateCategory'])->name('products.category.update');
 
+
 });
 
 
 Route::prefix('profile')->name('home.')->group(function(){
     Route::get('/', [ProfileController::class , 'index'])->name('users_profile.index');
+    Route::put('/edit-user', [ProfileController::class , 'update'])->name('users_profile.edit');
 
     Route::get('/comments', [HomeCommentController::class , 'usersProfileIndex'])->name('comments.users_profile.index');
 
@@ -126,6 +128,7 @@ Route::get('/payment-verify/{gatewayName}', [PaymentController::class , 'payment
 Route::any('/login', [AuthController::class , 'login'])->name('login');
 Route::post('/check-otp', [AuthController::class , 'checkOtp']);
 Route::post('/resend-otp', [AuthController::class , 'resendOtp']);
+Route::get('/logout', [AuthController::class , 'logout'])->name('logout');
 
 
 Route::get('/about-us', [HomeController::class , 'aboutUs'])->name('home.about-us');
@@ -136,7 +139,12 @@ Route::get('/sitemap', [SitemapController::class , 'index'])->name('home.sitemap
 Route::get('/sitemap-products', [SitemapController::class , 'sitemapProducts'])->name('home.sitemap.products');
 Route::get('/sitemap-tags', [SitemapController::class , 'sitemapTags'])->name('home.sitemap.tags');
 
+
 Route::get('/test' , function () {
+    // auth()->loginUsingId(2);
+    // auth()->logOut();
+    // auth()->logout();
+    // dd(auth(),'LogOut');
     dd(auth()->user());
     // \Cart::clear();
     // dd(\Cart::getContent());

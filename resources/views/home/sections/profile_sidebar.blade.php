@@ -2,7 +2,10 @@
     <div class="myaccount-tab-menu nav" role="tablist">
 
         <a href="{{ route('home.users_profile.index') }}" class="{{ request()->is('profile') ? 'active' : '' }}">
-            <i class="sli sli-user ml-1"></i>
+            {{-- <i class="sli sli-user ml-1"></i> --}}
+                <img class="card-img-top rounded-circle"
+                    src="{{ url(env('USER_IMAGES_UPLOAD_PATH') . auth()->user()->avatar) }}"
+                    alt="{{ auth()->user()->avatar }}" style="width: 50px; height:50px;">
             پروفایل
         </a>
 
@@ -26,7 +29,7 @@
             نظرات
         </a>
 
-        <a href="login.html">
+        <a href="{{ route('logout') }}">
             <i class="sli sli-logout ml-1"></i>
             خروج
         </a>
